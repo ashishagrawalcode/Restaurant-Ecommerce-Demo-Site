@@ -74,7 +74,6 @@ img {
   margin-bottom: 12px;
 }
 
-
 .section-head {
   text-align: center;
   max-width: 720px;
@@ -86,7 +85,6 @@ img {
   display: inline-block;
 }
 
-/* Luxury Buttons */
 .btn {
   display: inline-flex;
   align-items: center;
@@ -111,8 +109,6 @@ img {
   color: #171717;
 }
 
-
-/* ------------ HERO SECTION WITH FULL-WIDTH IMAGE & TRANSPARENT NAVBAR OVERLAY ------------ */
 .hero-viewport {
   position: relative;
   min-height: 94vh;
@@ -126,7 +122,6 @@ img {
   overflow: hidden;
 }
 
-/* Combined Transparent Overlay Navbar */
 .navbar-overlay {
   position: relative;
   z-index: 100;
@@ -181,26 +176,6 @@ img {
   opacity: 0.9;
 }
 
-/* Mobile Toggle */
-.nav-toggle-label {
-  display: none;
-  flex-direction: column;
-  gap: 6px;
-  cursor: pointer;
-  padding: 8px;
-}
-
-.nav-toggle-label span {
-  width: 24px;
-  height: 1.5px;
-  background: var(--heading);
-}
-
-#nav-toggle {
-  display: none;
-}
-
-/* Hero Text Content (No clashing with right-side food image) */
 .hero-main-content {
   position: relative;
   z-index: 2;
@@ -254,8 +229,6 @@ img {
   flex-wrap: wrap;
 }
 
-
-/* ------------ CULINARY HIGHLIGHTS (MENU PREVIEW MATCHING LUMIÈRE) ------------ */
 .culinary-section {
   position: relative;
   padding: 100px 40px;
@@ -334,9 +307,6 @@ img {
   border-top: 1px solid var(--border);
 }
 
-
-
-/* ------------ FOOTER ------------ */
 footer {
   background: var(--bg-card);
   padding: 40px 20px;
@@ -376,59 +346,4 @@ footer {
   font-size: 12px;
   color: var(--body-text);
   opacity: 0.7;
-}
-
-/* ------------ RESPONSIVE MEDIA QUERIES ------------ */
-@media (max-width: 1100px) {
-  .hero-viewport {
-    min-height: 80vh;
-  }
-
-  .culinary-grid {
-    grid-template-columns: repeat(3, 1fr);
-  }
-}
-
-@media (max-width: 820px) {
-  .culinary-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-@media (max-width: 768px) {
-  .nav-inner {
-    padding: 20px 24px;
-  }
-
-  .nav-toggle-label {
-    display: flex;
-  }
-
-  .nav-menu-list {
-    position: absolute;
-    top: 100%;
-    left: 0;
-    right: 0;
-    background: var(--bg-card);
-    flex-direction: column;
-    align-items: flex-start;
-    padding: 28px 24px;
-    gap: 20px;
-    display: none;
-    box-shadow: var(--shadow-card);
-  }
-
-  #nav-toggle:checked~.nav-menu-list {
-    display: flex;
-  }
-
-  .hero-main-content {
-    padding: 40px 24px 80px;
-  }
-}
-
-@media (max-width: 560px) {
-  .culinary-grid {
-    grid-template-columns: 1fr;
-  }
 }
