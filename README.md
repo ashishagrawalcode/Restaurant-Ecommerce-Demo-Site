@@ -49,19 +49,18 @@ The color scheme is crafted to evoke royal Indian heritage, warm hospitality, an
 
 | Category | Dish Name | Description | Price |
 | :--- | :--- | :--- | :-: |
-| **Royal Feast** | **Govind ke Maharaja Indian Thali** | Platter of Paneer Butter Masala, Dal Makhani, Pulao, Naan & Lassi | ₹280 |
-| **Royal Classic** | **Govind ke Chole Bhature** | Pillowy fried bhature with slow-simmered dark chana masala | ₹120 |
-| **Royal Classic** | **Govind ke Malai Chaap** | Char-grilled soya skewers in cream & cashew marinade | ₹180 |
-| **Sweet Devotion** | **Govind ke Rasmalai** | Delicate chenna discs in saffron-cardamom milk | ₹90 |
-| **Asian Gourmet** | **Govind ke Hakka Noodles** | Wok-tossed noodles with fresh vegetables & sesame | ₹150 |
-| **Street Special** | **Gungune Govind ke Gulgule Golgappe** | Crisp puris filled with spiced potato sprouts & mint water | ₹80 |
-| **Steamed Special** | **Govind ke Momos** | Steamed vegetable dumplings with fiery red chutney | ₹110 |
-| **Luxury Dessert** | **Govind ke Hot Fudge Sundae** | Vanilla gelato with warm dark chocolate fudge & almonds | ₹140 |
-| **Artisan Ramen** | **Govind ke Ramen** | Rich vegetarian miso broth with hand-pulled noodles & bok choy | ₹190 |
-| **Cold Refreshment** | **Govind ke Strawberry Shake** | Mahabaleshwar strawberry shake with double cream | ₹130 |
-| **Cold Brew** | **Govind ke Iced Caramel Cold Coffee** | Arabica cold brew with salted caramel & cold foam | ₹145 |
-| **South Indian** | **Govind ke Masala Dosa** | Golden crispy crepe filled with spiced potato masala | ₹135 |
-| **Bhog Special** | **Govind ke Gulab Jamun** | Soft khoya dumplings soaked in warm rose-cardamom syrup | ₹70 |
+| **Royal Classic** | **Chole Bhature** | Pillowy fried bhature with slow-simmered dark chana masala | ₹120 |
+| **Street Special** | **Golgappe** | Crisp puris filled with spiced potato sprouts & mint water | ₹80 |
+| **Bhog Special** | **Gulab Jamun** | Soft khoya dumplings soaked in warm rose-cardamom syrup | ₹70 |
+| **Asian Gourmet** | **Hakka Noodles** | Wok-tossed noodles with fresh vegetables & sesame | ₹150 |
+| **Luxury Dessert** | **Hot Fudge Sundae** | Vanilla gelato with warm dark chocolate fudge & almonds | ₹140 |
+| **Royal Feast** | **Maharaja Indian Thali** | Platter of Paneer Butter Masala, Dal Makhani, Pulao, Naan & Lassi | ₹280 |
+| **Royal Classic** | **Malai Chaap** | Char-grilled soya skewers in cream & cashew marinade | ₹180 |
+| **South Indian** | **Masala Dosa** | Golden crispy crepe filled with spiced potato masala | ₹135 |
+| **Steamed Special** | **Momos** | Steamed vegetable dumplings with fiery red chutney | ₹110 |
+| **Artisan Ramen** | **Ramen** | Rich vegetarian miso broth with hand-pulled noodles & bok choy | ₹190 |
+| **Sweet Devotion** | **Rasmalai** | Delicate chenna discs in saffron-cardamom milk | ₹90 |
+| **Cold Refreshment** | **Strawberry Shake** | Mahabaleshwar strawberry shake with double cream | ₹130 |
 
 ---
 
