@@ -1,9 +1,9 @@
 <div align="center">
 
-# 👑 GOVINDAM
-### *Devotional Dining & Pure Vegetarian Kitchen*
+# 👑 THE SAFFRON PLATE
+### *Fine Dining & Pure Vegetarian Kitchen*
 
-An ultra-luxurious, pure HTML5 & CSS3 website for **Govindam**, a high-end vegetarian restaurant blending royal Indian culinary heritage with modern gastronomy aesthetics.
+An ultra-luxurious, pure HTML5 & CSS3 website for **The Saffron Plate**, a high-end vegetarian restaurant blending royal Indian culinary heritage with modern gastronomy aesthetics.
 
 [Live Demo](#-getting-started) • [Menu Highlights](#-signature-menu) • [Design System](#-design-system) • [Project Structure](#-file-structure)
 
@@ -13,7 +13,7 @@ An ultra-luxurious, pure HTML5 & CSS3 website for **Govindam**, a high-end veget
 
 ## 🌟 Overview
 
-**Govindam** offers a divine dining experience with a design inspired by world-class gastronomy interfaces (e.g., *LUMIÈRE*). Built with **zero JavaScript**, the website leverages advanced CSS3 capabilities including backdrop-filters, custom properties, glassmorphism, responsive grid architecture, and pure CSS interaction hooks.
+**The Saffron Plate** offers an exquisite dining experience with a design inspired by world-class gastronomy interfaces (e.g., *LUMIÈRE*). Built with **zero JavaScript**, the website leverages advanced CSS3 capabilities including backdrop-filters, custom properties, glassmorphism, responsive grid architecture, and pure CSS interaction hooks.
 
 ---
 
@@ -51,7 +51,7 @@ The color scheme is crafted to evoke royal Indian heritage, warm hospitality, an
 | :--- | :--- | :--- | :-: |
 | **Royal Classic** | **Chole Bhature** | Pillowy fried bhature with slow-simmered dark chana masala | ₹120 |
 | **Street Special** | **Golgappe** | Crisp puris filled with spiced potato sprouts & mint water | ₹80 |
-| **Bhog Special** | **Gulab Jamun** | Soft khoya dumplings soaked in warm rose-cardamom syrup | ₹70 |
+| **Chef's Special** | **Gulab Jamun** | Soft khoya dumplings soaked in warm rose-cardamom syrup | ₹70 |
 | **Asian Gourmet** | **Hakka Noodles** | Wok-tossed noodles with fresh vegetables & sesame | ₹150 |
 | **Luxury Dessert** | **Hot Fudge Sundae** | Vanilla gelato with warm dark chocolate fudge & almonds | ₹140 |
 | **Royal Feast** | **Maharaja Indian Thali** | Platter of Paneer Butter Masala, Dal Makhani, Pulao, Naan & Lassi | ₹280 |
@@ -59,7 +59,7 @@ The color scheme is crafted to evoke royal Indian heritage, warm hospitality, an
 | **South Indian** | **Masala Dosa** | Golden crispy crepe filled with spiced potato masala | ₹135 |
 | **Steamed Special** | **Momos** | Steamed vegetable dumplings with fiery red chutney | ₹110 |
 | **Artisan Ramen** | **Ramen** | Rich vegetarian miso broth with hand-pulled noodles & bok choy | ₹190 |
-| **Sweet Devotion** | **Rasmalai** | Delicate chenna discs in saffron-cardamom milk | ₹90 |
+| **Signature Dessert** | **Rasmalai** | Delicate chenna discs in saffron-cardamom milk | ₹90 |
 | **Cold Refreshment** | **Strawberry Shake** | Mahabaleshwar strawberry shake with double cream | ₹130 |
 
 ---
@@ -117,6 +117,6 @@ To run this project locally:
 
 <div align="center">
 
-Made with Bhakti &amp; Precision • **Govindam Pure Vegetarian Kitchen**
+Crafted with Excellence &amp; Precision • **The Saffron Plate Pure Vegetarian Kitchen**
 
 </div>
