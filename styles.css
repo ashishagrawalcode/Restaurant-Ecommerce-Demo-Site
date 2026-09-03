@@ -11,7 +11,7 @@
   --shadow-card: 0 25px 50px -12px rgba(0, 0, 0, 0.85);
   --radius-sm: 4px;
   --radius-md: 8px;
-  --transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  --transition: all 0.3s ease;
 }
 
 *,
@@ -31,16 +31,12 @@ body {
   color: var(--body-text);
   font-family: var(--font-sans);
   font-weight: 300;
-  line-height: 1.7;
+  line-height: 1.6;
   overflow-x: hidden;
+  width: 100%;
 }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
+h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-serif);
   color: var(--heading);
   font-weight: 600;
@@ -63,10 +59,11 @@ img {
   display: block;
 }
 
+/* Base Utility Classes */
 .eyebrow {
   font-family: var(--font-sans);
-  font-size: 11px;
-  letter-spacing: 0.4em;
+  font-size: 12px;
+  letter-spacing: 0.35em;
   color: var(--gold);
   font-weight: 500;
   text-transform: uppercase;
@@ -76,77 +73,97 @@ img {
 
 .section-head {
   text-align: center;
-  max-width: 720px;
-  margin: 0 auto 64px;
+  max-width: 800px;
+  margin: 0 auto 60px;
 }
 
 .section-head h2 {
-  font-size: clamp(32px, 4.2vw, 50px);
-  display: inline-block;
+  font-size: clamp(32px, 4vw, 48px);
+  letter-spacing: 0.08em;
 }
 
 .btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 10px;
-  padding: 16px 38px;
+  padding: 16px 40px;
   font-family: var(--font-sans);
-  font-size: 12px;
-  letter-spacing: 0.24em;
-  font-weight: 500;
+  font-size: 13px;
+  letter-spacing: 0.2em;
+  font-weight: 600;
   text-transform: uppercase;
-  border: 1px solid var(--gold);
-  background: rgba(33, 30, 27, 0.4);
-  color: var(--gold);
-  cursor: pointer;
   border-radius: var(--radius-sm);
-  backdrop-filter: blur(4px);
+  transition: var(--transition);
+  cursor: pointer;
 }
 
 .btn.solid {
   background: var(--gold);
   color: #171717;
+  border: 1px solid var(--gold);
 }
 
+.btn.solid:hover {
+  background: #d8b132;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(201, 162, 39, 0.3);
+}
+
+/* Header & Navigation */
 .hero-viewport {
   position: relative;
-  min-height: 94vh;
+  min-height: 100vh;
   width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   background:
-    linear-gradient(to right, #171717 0%, rgba(23, 23, 23, 0.95) 35%, rgba(23, 23, 23, 0.6) 65%, rgba(23, 23, 23, 0.2) 100%),
+    linear-gradient(to right, rgba(23, 23, 23, 0.98) 0%, rgba(23, 23, 23, 0.85) 45%, rgba(23, 23, 23, 0.4) 100%),
     url('images/hero_dish.jpg') center right / cover no-repeat;
-  overflow: hidden;
 }
 
 .navbar-overlay {
-  position: relative;
-  z-index: 100;
   width: 100%;
-  background: linear-gradient(to bottom, rgba(23, 23, 23, 0.85), transparent);
+  background: linear-gradient(to bottom, rgba(23, 23, 23, 0.9), transparent);
+  padding: 24px 60px;
 }
 
 .nav-inner {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 24px 50px;
-  max-width: 1400px;
-  margin: 0 auto;
+  width: 100%;
+}
+
+.nav-menu-list {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+}
+
+.nav-menu-list a {
+  font-size: 12px;
+  letter-spacing: 0.25em;
+  color: var(--heading);
+  font-weight: 500;
+  text-transform: uppercase;
+  opacity: 0.85;
+  transition: opacity 0.2s ease, color 0.2s ease;
+}
+
+.nav-menu-list a:hover {
+  opacity: 1;
+  color: var(--gold);
 }
 
 .brand-center {
   text-align: center;
-  line-height: 1.1;
 }
 
 .brand-name {
   font-family: var(--font-serif);
-  font-size: 28px;
-  letter-spacing: 0.22em;
+  font-size: 30px;
+  letter-spacing: 0.2em;
   color: var(--heading);
   font-weight: 700;
 }
@@ -154,136 +171,105 @@ img {
 .brand-sub {
   display: block;
   font-family: var(--font-sans);
-  font-size: 8.5px;
-  letter-spacing: 0.48em;
+  font-size: 9px;
+  letter-spacing: 0.45em;
   color: var(--gold);
-  margin-top: 3px;
+  margin-top: 4px;
   text-transform: uppercase;
 }
 
-.nav-menu-list {
+/* Hero Section Content */
+.hero-main-content {
+  flex-grow: 1;
   display: flex;
   align-items: center;
-  gap: 36px;
-}
-
-.nav-menu-list a {
-  font-size: 11.5px;
-  letter-spacing: 0.22em;
-  color: var(--heading);
-  font-weight: 400;
-  text-transform: uppercase;
-  opacity: 0.9;
-}
-
-.hero-main-content {
-  position: relative;
-  z-index: 2;
-  max-width: 1400px;
-  margin: 0 auto;
-  padding: 60px 50px 100px;
   width: 100%;
+  padding: 60px 60px 100px;
 }
 
 .hero-text-box {
-  max-width: 620px;
+  max-width: 650px;
 }
 
-.hero-devanagari {
+.hero-subtitle {
   font-family: var(--font-display);
   font-style: italic;
-  font-size: 23px;
+  font-size: 24px;
   color: var(--gold);
-  margin-bottom: 16px;
-  letter-spacing: 0.05em;
+  margin-bottom: 20px;
   display: block;
 }
 
-.hero h1 {
-  font-size: clamp(48px, 6vw, 84px);
-  line-height: 1.02;
+.hero-text-box h1 {
+  font-size: clamp(48px, 6vw, 80px);
+  line-height: 1.05;
   margin-bottom: 24px;
   text-transform: uppercase;
-  letter-spacing: 0.03em;
+  letter-spacing: 0.04em;
+  color: var(--heading);
 }
 
-.hero h1 em {
+.hero-text-box h1 em {
   font-family: var(--font-display);
   font-style: italic;
   font-weight: 500;
   color: var(--gold);
-  text-transform: none;
+  text-transform: uppercase;
 }
 
 .hero-sub {
   font-size: 17px;
   color: var(--body-text);
   line-height: 1.8;
-  margin-bottom: 42px;
-  max-width: 520px;
+  margin-bottom: 40px;
+  max-width: 540px;
 }
 
-.hero-cta {
-  display: flex;
-  gap: 22px;
-  flex-wrap: wrap;
-}
-
+/* Menu Highlights Section */
 .culinary-section {
-  position: relative;
-  padding: 100px 40px;
-  background: var(--bg-main);
-  overflow: hidden;
+  width: 100%;
+  padding: 100px 60px;
+  background-color: var(--bg-main);
 }
 
 .culinary-grid {
-  max-width: 1280px;
-  margin: 0 auto;
+  width: 100%;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 20px;
+  gap: 24px;
 }
 
 .culinary-card {
   background: var(--bg-card);
   border: 1px solid var(--border);
   border-radius: var(--radius-md);
-  padding: 16px;
+  padding: 20px;
   display: flex;
   flex-direction: column;
-  text-align: left;
   transition: var(--transition);
 }
 
 .culinary-card:hover {
   border-color: var(--gold);
   transform: translateY(-4px);
-  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.6), 0 0 15px rgba(201, 162, 39, 0.12);
+  box-shadow: 0 16px 32px rgba(0, 0, 0, 0.7);
 }
 
 .culinary-card-img {
   width: 100%;
-  height: 140px;
+  height: 180px;
   object-fit: cover;
   border-radius: var(--radius-sm);
-  margin-bottom: 12px;
+  margin-bottom: 16px;
   border: 1px solid var(--border);
-  transition: transform 0.4s ease, border-color 0.4s ease;
-}
-
-.culinary-card:hover .culinary-card-img {
-  transform: scale(1.02);
-  border-color: var(--gold);
 }
 
 .culinary-card h3 {
-  font-size: 14px;
-  letter-spacing: 0.04em;
+  font-size: 15px;
+  letter-spacing: 0.05em;
   color: var(--heading);
   text-transform: uppercase;
-  margin-bottom: 6px;
-  line-height: 1.35;
-  transition: color 0.3s ease;
+  margin-bottom: 8px;
 }
 
 .culinary-card:hover h3 {
@@ -291,55 +277,57 @@ img {
 }
 
 .culinary-card p {
-  font-size: 12.5px;
+  font-size: 13px;
   color: var(--body-text);
-  line-height: 1.5;
-  margin-bottom: 12px;
+  line-height: 1.6;
+  margin-bottom: 16px;
   flex-grow: 1;
 }
 
 .culinary-card .price {
   font-family: var(--font-serif);
-  font-size: 17px;
+  font-size: 18px;
   color: var(--gold);
   font-weight: 600;
-  padding-top: 10px;
+  padding-top: 12px;
   border-top: 1px solid var(--border);
 }
 
+/* Footer Section */
 footer {
   background: var(--bg-card);
-  padding: 40px 20px;
+  padding: 50px 20px;
   text-align: center;
+  border-top: 1px solid var(--border);
 }
 
 .footer-simple {
-  max-width: 1280px;
-  margin: 0 auto;
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 14px;
+  gap: 16px;
 }
 
 .footer-simple .brand-name {
-  font-family: var(--font-serif);
-  font-size: 22px;
-  letter-spacing: 0.2em;
-  color: var(--heading);
-  font-weight: 700;
+  font-size: 24px;
 }
 
 .footer-simple-links {
   display: flex;
-  gap: 24px;
+  gap: 28px;
 }
 
 .footer-simple-links a {
   font-size: 12px;
-  letter-spacing: 0.15em;
+  letter-spacing: 0.2em;
   color: var(--body-text);
   text-transform: uppercase;
+  transition: color 0.2s ease;
+}
+
+.footer-simple-links a:hover {
+  color: var(--gold);
 }
 
 .footer-simple p {
