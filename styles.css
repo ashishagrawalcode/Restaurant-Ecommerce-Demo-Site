@@ -36,7 +36,12 @@ body {
   width: 100%;
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-family: var(--font-serif);
   color: var(--heading);
   font-weight: 600;
@@ -369,12 +374,15 @@ footer {
   .navbar-overlay {
     padding: 20px 24px;
   }
+
   .culinary-section {
     padding: 60px 24px;
   }
+
   .culinary-grid {
     grid-template-columns: repeat(1, 1fr);
   }
+
   .hero-main-content {
     padding: 40px 24px 80px;
   }
