@@ -164,10 +164,17 @@
   margin-bottom: 2px;
 }
 
-.info-item-text p {
+.info-item-text p,
+.info-item-text a {
   font-size: 13px;
   color: var(--body-text);
   line-height: 1.5;
+  text-decoration: none;
+  transition: color var(--transition-fast);
+}
+
+.info-item-text a:hover {
+  color: var(--gold);
 }
 
 @media (max-width: 768px) {
