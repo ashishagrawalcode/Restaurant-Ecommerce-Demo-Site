@@ -4,12 +4,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Table Reservation — The Saffron Plate</title>
+  <title>Our Team — The Saffron Plate</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
-  <link rel="stylesheet" href="reservation.css">
+  <link rel="stylesheet" href="team.css">
 </head>
 
 <body>
@@ -19,7 +19,7 @@
       <div class="nav-menu-list left">
         <a href="index.html">Home</a>
         <a href="index.html#menu">Menu</a>
-        <a href="reservation.html" class="active">Reservations</a>
+        <a href="reservation.html">Reservations</a>
       </div>
       <a href="index.html" class="brand-center">
         <span class="brand-name">THE SAFFRON PLATE</span>
@@ -32,50 +32,36 @@
     </div>
   </header>
 
-  <main class="res-container">
-    <div class="res-card">
-      <h2>RESERVE A TABLE</h2>
-      <form class="res-form" action="#" method="post">
-        
-        <div class="form-row">
-          <div class="form-group">
-            <label for="name">Guest Name</label>
-            <input type="text" id="name" class="form-input" placeholder="Your Name">
-          </div>
-          <div class="form-group">
-            <label for="phone">Phone Number</label>
-            <input type="tel" id="phone" class="form-input" placeholder="+91 9876543210">
-          </div>
-        </div>
+  <main class="team-container">
+    <div class="team-head">
+      <span class="eyebrow">PROJECT CONTRIBUTORS</span>
+      <h2>OUR TEAM</h2>
+    </div>
 
-        <div class="form-row">
-          <div class="form-group">
-            <label for="guests">Guests</label>
-            <select id="guests" class="form-input">
-              <option>2 Guests</option>
-              <option>4 Guests</option>
-              <option>6 Guests</option>
-              <option>8+ Guests</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label for="date">Date</label>
-            <input type="date" id="date" class="form-input">
-          </div>
-        </div>
+    <div class="team-grid">
+      <div class="team-card">
+        <img src="images/vivek_yadav.jpg" alt="Vivek Yadav">
+        <h3>Vivek Yadav</h3>
+        <p>Team Member</p>
+      </div>
 
-        <div class="form-group">
-          <label for="time">Preferred Time</label>
-          <select id="time" class="form-input">
-            <option>07:00 PM (Dinner)</option>
-            <option>08:30 PM (Dinner)</option>
-            <option>01:00 PM (Lunch)</option>
-          </select>
-        </div>
+      <div class="team-card">
+        <img src="images/ashish_agrawal.jpg" alt="Ashish Agrawal">
+        <h3>Ashish Agrawal</h3>
+        <p>Team Member</p>
+      </div>
 
-        <button type="button" class="res-btn">CONFIRM RESERVATION</button>
+      <div class="team-card">
+        <img src="images/shreya_chaudhary.jpg" alt="Shreya Chaudhary">
+        <h3>Shreya Chaudhary</h3>
+        <p>Team Member</p>
+      </div>
 
-      </form>
+      <div class="team-card">
+        <img src="images/khush_raghav.jpg" alt="Khush Raghav">
+        <h3>Khush Raghav</h3>
+        <p>Team Member</p>
+      </div>
     </div>
   </main>
 

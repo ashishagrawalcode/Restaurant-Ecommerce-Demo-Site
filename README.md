@@ -68,25 +68,30 @@ The color scheme is crafted to evoke royal Indian heritage, warm hospitality, an
 
 ```
 assessment/
-├── index.html          # Semantic HTML5 Structure (No JS)
-├── styles.css          # Pure Vanilla CSS Design System & Layouts
-├── README.md           # Documentation
-└── images/             # High-Resolution Food Photography Assets
-    ├── hero_dish.jpg
-    ├── indian_thali.jpg
-    ├── chole_bhature.jpg
-    ├── malai_chaap.jpg
-    ├── rasmalai.jpg
-    ├── hakka_noodles.jpg
-    ├── golgappe.jpg
-    ├── momos.jpg
-    ├── sundae.jpg
-    ├── ramen.jpg
-    ├── strawberry_shake.jpg
-    ├── iced_coffee.jpg
-    ├── masala_dosa.jpg
-    └── gulab_jamun.jpg
+├── index.html          # Main Homepage & Menu Showcase
+├── styles.css          # Core Design System & Global Styles
+├── about.html          # About Us & Restaurant Heritage
+├── about.css           # About Page Styles
+├── reservation.html    # Table Reservation Form
+├── reservation.css     # Reservation Page Styles
+├── auth.html           # Guest Account Access / Sign In
+├── auth.css            # Auth Page Styles
+├── contact.html        # Contact & Inquiries Page
+├── contact.css         # Contact Page Styles
+├── team.html           # Project Team Showcase Page
+├── team.css            # Team Page Styles
+├── README.md           # Project Documentation
+└── images/             # High-Resolution Photography Assets
 ```
+
+---
+
+## 👥 Project Team
+
+- **Vivek Yadav**
+- **Ashish Agrawal**
+- **Shreya Chaudhary**
+- **Khush Raghav**
 
 ---
 
@@ -96,7 +101,7 @@ To run this project locally:
 
 1. **Clone the repository**:
    ```bash
-   git clone https://github.com/ashishagrawalcode/Restaurant-Ecommerce-Demo-Site.git
+   git clone https://github.com/SHREYA-421/Restaurant-Ecommerce-Demo-Site.git
    ```
 2. **Navigate into the directory**:
    ```bash
