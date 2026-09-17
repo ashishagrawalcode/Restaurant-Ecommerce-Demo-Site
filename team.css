@@ -1,9 +1,11 @@
+/* Navigation Header */
 .team-header-nav {
   position: relative;
   background: var(--bg-card);
   border-bottom: 1px solid var(--border);
 }
 
+/* Team Section Layout */
 .team-container {
   max-width: 1000px;
   margin: 40px auto 80px;
@@ -21,6 +23,7 @@
   gap: 20px;
 }
 
+/* Team Member Cards */
 .team-card {
   background: var(--bg-card);
   border: 1px solid var(--border);
@@ -54,16 +57,4 @@
   font-size: 13px;
   color: var(--gold);
   letter-spacing: 0.05em;
-}
-
-@media (max-width: 900px) {
-  .team-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-@media (max-width: 500px) {
-  .team-grid {
-    grid-template-columns: 1fr;
-  }
 }

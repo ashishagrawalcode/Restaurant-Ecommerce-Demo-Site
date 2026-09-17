@@ -1,3 +1,4 @@
+/* Design System Variables */
 :root {
   --bg-main: #171717;
   --bg-card: #211E1B;
@@ -14,6 +15,7 @@
   --transition: all 0.3s ease;
 }
 
+/* Base Styles & Reset */
 *,
 *::before,
 *::after {
@@ -64,6 +66,7 @@ img {
   display: block;
 }
 
+/* Utility Components */
 .eyebrow {
   font-family: var(--font-sans);
   font-size: 12px;
@@ -113,6 +116,7 @@ img {
   box-shadow: 0 8px 20px rgba(201, 162, 39, 0.3);
 }
 
+/* Hero & Navigation Section */
 .hero-viewport {
   position: relative;
   min-height: 100vh;
@@ -226,6 +230,7 @@ img {
   max-width: 540px;
 }
 
+/* Menu Highlights Section */
 .culinary-section {
   width: 100%;
   padding: 100px 60px;
@@ -314,6 +319,7 @@ img {
   box-shadow: 0 4px 15px rgba(201, 162, 39, 0.25);
 }
 
+/* Footer Section */
 footer {
   background: var(--bg-card);
   padding: 50px 20px;
@@ -356,28 +362,4 @@ footer {
   font-size: 12px;
   color: var(--body-text);
   opacity: 0.7;
-}
-
-@media (max-width: 1024px) {
-  .culinary-grid {
-    grid-template-columns: repeat(3, 1fr);
-  }
-}
-
-@media (max-width: 768px) {
-  .navbar-overlay {
-    padding: 20px 24px;
-  }
-
-  .culinary-section {
-    padding: 60px 24px;
-  }
-
-  .culinary-grid {
-    grid-template-columns: repeat(1, 1fr);
-  }
-
-  .hero-main-content {
-    padding: 40px 24px 80px;
-  }
 }
