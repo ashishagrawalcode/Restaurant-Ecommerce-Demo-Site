@@ -1,3 +1,9 @@
+.team-header-nav {
+  position: relative;
+  background: var(--bg-card);
+  border-bottom: 1px solid var(--border);
+}
+
 .team-container {
   max-width: 1000px;
   margin: 40px auto 80px;
