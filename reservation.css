@@ -1,3 +1,9 @@
+.res-header-nav {
+  position: relative;
+  background: var(--bg-card);
+  border-bottom: 1px solid var(--border);
+}
+
 .res-container {
   max-width: 600px;
   margin: 40px auto 80px;
