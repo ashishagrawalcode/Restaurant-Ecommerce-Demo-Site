@@ -176,9 +176,3 @@
 .info-item-text a:hover {
   color: var(--gold);
 }
-
-@media (max-width: 768px) {
-  .contact-grid {
-    grid-template-columns: 1fr;
-  }
-}

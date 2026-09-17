@@ -73,9 +73,3 @@
   color: var(--body-text);
   line-height: 1.7;
 }
-
-@media (max-width: 768px) {
-  .about-card {
-    grid-template-columns: 1fr;
-  }
-}
