@@ -1,18 +1,6 @@
 // The Saffron Plate - Order Online & Cart System
-const MENU_ITEMS = [
-  { id: "thali-01", name: "Maharaja Indian Thali", category: "royal-classics", price: 280, tags: ["chef", "jain"], image: "images/indian_thali.jpg", badge: "Royal Banquet", description: "Paneer butter masala, dal makhani, jeera pulao, butter naan, gulab jamun & sweet lassi." },
-  { id: "chaap-02", name: "Malai Chaap", category: "royal-classics", price: 180, tags: ["mild"], image: "images/malai_chaap.jpg", badge: "Tandoor Special", description: "Char-grilled soya skewers marinated in clotted cream, cashew paste, and green cardamom." },
-  { id: "chole-03", name: "Chole Bhature", category: "royal-classics", price: 120, tags: ["spicy"], image: "images/chole_bhature.jpg", badge: "Old Delhi Heritage", description: "Puffed bhature served with slow-simmered dark chana masala, pickle, and ginger." },
-  { id: "golgappe-04", name: "Golgappe", category: "street-specials", price: 80, tags: ["spicy", "jain"], image: "images/golgappe.jpg", badge: "Street Artisan", description: "Crisp semolina puris with spiced potato sprouts, date chutney & chilled digestive mint water." },
-  { id: "momos-05", name: "Steamed Vegetable Momos", category: "street-specials", price: 110, tags: ["spicy"], image: "images/momos.jpg", badge: "Himalayan Classic", description: "Thin-skinned dumplings packed with garden greens, served with roasted tomato dip." },
-  { id: "hakka-06", name: "Wok-Tossed Hakka Noodles", category: "asian-gourmet", price: 150, tags: ["chef"], image: "images/hakka_noodles.jpg", badge: "Gourmet Asian", description: "Wheat noodles tossed over high flame with crunchy bell peppers, garlic & pure sesame oil." },
-  { id: "ramen-07", name: "Artisan Vegetarian Ramen", category: "asian-gourmet", price: 190, tags: ["chef"], image: "images/ramen.jpg", badge: "Signature Bowl", description: "Miso-shiitake broth with hand-pulled noodles, braised tofu, bok choy, and mushrooms." },
-  { id: "dosa-08", name: "Mysore Masala Dosa", category: "south-indian", price: 135, tags: ["spicy", "jain"], image: "images/masala_dosa.jpg", badge: "Crispy Delight", description: "Fermented crepe layered with spicy chutney and potato mash, served with sambar." },
-  { id: "gulab-09", name: "Shahi Gulab Jamun", category: "desserts", price: 70, tags: ["mild", "jain"], image: "images/gulab_jamun.jpg", badge: "Sweet Legacy", description: "Golden khoya dumplings in pure desi ghee, soaked in warm Kashmiri saffron rose syrup." },
-  { id: "rasmalai-10", name: "Kesar Pista Rasmalai", category: "desserts", price: 90, tags: ["mild", "jain"], image: "images/rasmalai.jpg", badge: "Royal Sweet", description: "Cottage cheese patties in thickened saffron milk, garnished with Persian pistachios." },
-  { id: "sundae-11", name: "Belgian Hot Fudge Sundae", category: "desserts", price: 140, tags: ["mild"], image: "images/sundae.jpg", badge: "Lounge Dessert", description: "Vanilla bean gelato drenched in warm 70% dark Belgian cocoa fudge and roasted almonds." },
-  { id: "shake-12", name: "Strawberry Milkshake", category: "beverages", price: 130, tags: ["mild", "jain"], image: "images/strawberry_shake.jpg", badge: "Chilled Sip", description: "Fresh farm strawberry puree churned with organic milk and fresh cream crown." }
-];
+let MENU_ITEMS = [];
+let menuLoadError = false;
 
 let cart = [];
 let activeCategory = "all";
@@ -53,6 +41,19 @@ function renderMenu() {
   const noRes = document.getElementById("no-results-box");
   const countEl = document.getElementById("results-count");
   if (!grid) return;
+
+  if (menuLoadError) {
+    grid.innerHTML = "";
+    if (countEl) countEl.textContent = "0 Items";
+    if (noRes) {
+      noRes.hidden = false;
+      const title = noRes.querySelector("h3");
+      const message = noRes.querySelector("p");
+      if (title) title.textContent = "Menu Unavailable";
+      if (message) message.textContent = "The menu could not be loaded. Please try again later.";
+    }
+    return;
+  }
 
   const filtered = MENU_ITEMS.filter(item => {
     const matchCat = activeCategory === "all" || item.category === activeCategory;
@@ -187,10 +188,27 @@ function renderCart() {
   if (payModalTotal) payModalTotal.textContent = `₹${grandTotal}`;
 }
 
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", async () => {
   loadCart();
-  renderMenu();
   renderCart();
+
+  try {
+    const response = await fetch("menu.json");
+    if (!response.ok) {
+      throw new Error(`Menu request failed with status ${response.status}`);
+    }
+
+    const menuItems = await response.json();
+    if (!Array.isArray(menuItems)) {
+      throw new Error("Menu data must be a JSON array");
+    }
+
+    MENU_ITEMS = menuItems;
+  } catch (error) {
+    menuLoadError = true;
+    console.error("Menu load error:", error);
+  }
+  renderMenu();
 
   // Search
   const searchInput = document.getElementById("menu-search-input");

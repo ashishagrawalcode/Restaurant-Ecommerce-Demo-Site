@@ -1,6 +1,6 @@
 // The Saffron Plate - Gallery & Lightbox Logic
-document.addEventListener('DOMContentLoaded', () => {
-  const ITEMS = [
+document.addEventListener('DOMContentLoaded', async () => {
+  const STATIC_ITEMS = [
     { id: 'g1', title: 'The Starlit Rooftop Terrace', cat: 'terrace', badge: 'Terrace & View', img: 'images/terrace_dining.jpg', desc: 'Panoramic open-air dining under twilight skies with candle-lit teak tables and ambient live sitar.' },
     { id: 'g2', title: 'Skyline Twilight Veranda', cat: 'terrace', badge: 'Panoramic Vista', img: 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1200&q=80', desc: 'Sweeping 360-degree views over South Delhi canopies, illuminated under warm golden hour hues.' },
     { id: 'g3', title: 'Candlelit Fountain Courtyard', cat: 'terrace', badge: 'Open Courtyard', img: 'https://images.unsplash.com/photo-1578474846511-04ba529f0b88?auto=format&fit=crop&w=1200&q=80', desc: 'Central marble fountain rippling amidst hand-carved jaali screens, floating lotus candles, and jasmine.' },
@@ -15,11 +15,9 @@ document.addEventListener('DOMContentLoaded', () => {
     { id: 'g12', title: 'Evening Candlelit Welcome Pathway', cat: 'lounge', badge: 'Ambiance Vibe', img: 'https://images.unsplash.com/photo-1511795409834-ef04bbd61622?auto=format&fit=crop&w=1200&q=80', desc: 'A grand entrance flanked by brass oil lanterns, fresh rose petal urns, and aromatic saffron incense.' },
     { id: 'g13', title: 'Live Charcoal Tandoor & Handi Theater', cat: 'culinary', badge: 'Open Kitchen', img: 'https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=1200&q=80', desc: 'Open kitchen theater where bawarchis roast kebabs over hardwood embers and slow-simmer copper handis.' },
     { id: 'g14', title: 'Master Chef Vikramaditya', cat: 'culinary', badge: 'Culinary Master', img: 'images/chef_portrait.jpg', desc: 'Our visionary executive chef preserving ancestral Awadhi and Mewari royal court recipes with modern finesse.' },
-    { id: 'g15', title: 'The Royal Saffron Crown Presentation', cat: 'culinary', badge: 'Signature Dish', img: 'images/hero_dish.jpg', desc: 'A royal vegetarian centerpiece garnished with 24k edible gold vark, saffron threads, and herb oils.' },
-    { id: 'g16', title: 'The 12-Course Kansa Bronze Thali', cat: 'culinary', badge: 'Royal Banquet', img: 'images/indian_thali.jpg', desc: 'Traditional banquet served in pure hand-hammered bronze tableware, presenting an imperial culinary journey.' },
-    { id: 'g17', title: 'Charcoal Tandoori Malai Chaap', cat: 'culinary', badge: 'Tandoor Special', img: 'images/malai_chaap.jpg', desc: 'Char-grilled soya skewers steeped in clotted cream, green cardamom, roasted cashew puree, and micro-greens.' },
-    { id: 'g18', title: 'Kesar Pista Saffron Rasmalai', cat: 'culinary', badge: 'Artisan Dessert', img: 'images/rasmalai.jpg', desc: 'Cottage cheese medallions simmered in dense saffron-infused rabri, crowned with Persian pistachios.' }
+    { id: 'g15', title: 'The Royal Saffron Crown Presentation', cat: 'culinary', badge: 'Signature Dish', img: 'images/hero_dish.jpg', desc: 'A royal vegetarian centerpiece garnished with 24k edible gold vark, saffron threads, and herb oils.' }
   ];
+  let items = STATIC_ITEMS;
 
   const grid = document.getElementById('gallery-grid');
   const tabs = document.querySelectorAll('.gallery-tabs .filter-tab');
@@ -35,9 +33,10 @@ document.addEventListener('DOMContentLoaded', () => {
   let activeFilter = 'all';
   let currentIndex = 0;
   let isZoomed = false;
+  let menuLoadError = false;
 
   function getFiltered() {
-    return activeFilter === 'all' ? ITEMS : ITEMS.filter(it => it.cat === activeFilter);
+    return activeFilter === 'all' ? items : items.filter(it => it.cat === activeFilter);
   }
 
   function renderGallery() {
@@ -61,7 +60,11 @@ document.addEventListener('DOMContentLoaded', () => {
       card.addEventListener('click', () => openLightbox(Number(card.dataset.index)));
     });
 
-    if (counter) counter.textContent = `Showing ${list.length} Showcases`;
+    if (counter) {
+      counter.textContent = menuLoadError
+        ? `Showing ${list.length} Showcases — menu items unavailable`
+        : `Showing ${list.length} Showcases`;
+    }
   }
 
   function openLightbox(idx) {
@@ -125,6 +128,31 @@ document.addEventListener('DOMContentLoaded', () => {
       renderGallery();
     });
   });
+
+  try {
+    const response = await fetch("menu.json");
+    if (!response.ok) {
+      throw new Error(`Menu request failed with status ${response.status}`);
+    }
+
+    const menuItems = await response.json();
+    if (!Array.isArray(menuItems)) {
+      throw new Error("Menu data must be a JSON array");
+    }
+
+    const galleryMenuItems = menuItems.map(item => ({
+      id: item.id,
+      title: item.name,
+      cat: "culinary",
+      badge: item.badge,
+      img: item.image,
+      desc: item.description
+    }));
+    items = [...STATIC_ITEMS, ...galleryMenuItems];
+  } catch (error) {
+    menuLoadError = true;
+    console.error("Gallery menu load error:", error);
+  }
 
   renderGallery();
 });

@@ -69,10 +69,12 @@ The color scheme is crafted to evoke royal Indian heritage, warm hospitality, an
 ```
 assessment/
 ├── index.html          # Main Homepage & Menu Showcase
+├── index.js            # Homepage menu highlights loaded from menu.json
 ├── styles.css          # Core Design System & Global Styles
 ├── order.html          # Interactive Online Ordering & E-Commerce Cart
 ├── order.css           # Online Order Page Styles
 ├── order.js            # Menu Filtering, Cart State & Checkout Logic
+├── menu.json           # Shared menu catalog loaded by the homepage, order page, and gallery
 ├── gallery.html        # Dining Gallery, Ambiance & Architecture
 ├── gallery.css         # Gallery & Lightbox Styles
 ├── gallery.js          # Category Filter, Fullscreen Lightbox & Navigation
@@ -113,8 +115,8 @@ To run this project locally:
    ```bash
    cd Restaurant-Ecommerce-Demo-Site
    ```
-3. **Open `index.html` in your web browser**:
-   - Double click `index.html` or open via Live Server.
+3. **Start a local web server** (for example, with the VS Code Live Server extension), then open `index.html`:
+   - The order page fetches its menu from `menu.json`, so it must be served over HTTP rather than opened directly as a local file.
 
 ---
 
