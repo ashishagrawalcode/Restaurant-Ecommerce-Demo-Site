@@ -1,0 +1,74 @@
+[
+  {
+    "orderRef": "ORD-654173",
+    "customer": {
+      "name": "Ashish Agrawal",
+      "phone": "9876543210",
+      "address": "Hostel Block 4, BMU"
+    },
+    "items": [
+      {
+        "id": "thali-01",
+        "name": "Maharaja Indian Thali",
+        "price": 450,
+        "quantity": 2
+      },
+      {
+        "id": "beverage-01",
+        "name": "Iced Saffron Latte",
+        "price": 180,
+        "quantity": 1
+      }
+    ],
+    "subtotal": 1080,
+    "discount": 80,
+    "delivery": 0,
+    "tax": 50,
+    "total": 1050,
+    "status": "placed",
+    "notes": "Please serve hot",
+    "createdAt": "2026-11-14T15:37:34.174Z"
+  },
+  {
+    "orderRef": "ORD-059698",
+    "customer": {
+      "name": "Test"
+    },
+    "items": [
+      {
+        "name": "Dal Makhani",
+        "price": 280
+      }
+    ],
+    "subtotal": 0,
+    "discount": 0,
+    "delivery": 0,
+    "tax": 0,
+    "total": 280,
+    "status": "placed",
+    "notes": "",
+    "createdAt": "2026-11-14T15:10:59.698Z"
+  },
+  {
+    "orderRef": "ORD-101",
+    "customer": {
+      "name": "Ashish Agrawal",
+      "phone": "+91 9876543210",
+      "address": "GK-II, New Delhi"
+    },
+    "items": [
+      {
+        "id": "thali-01",
+        "name": "Maharaja Indian Thali",
+        "price": 280,
+        "quantity": 1
+      }
+    ],
+    "subtotal": 280,
+    "discount": 0,
+    "delivery": 40,
+    "tax": 14,
+    "total": 334,
+    "createdAt": "2026-11-14T19:00:00.000Z"
+  }
+]

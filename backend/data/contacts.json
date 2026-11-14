@@ -1,0 +1,28 @@
+[
+  {
+    "id": "msg-654183",
+    "name": "Ashish Agrawal",
+    "email": "ashish@bmu.edu.in",
+    "subject": "Evaluation Banquet Inquiry",
+    "message": "We would like to book the private hall for evaluation banquet.",
+    "status": "pending",
+    "createdAt": "2026-11-14T15:37:34.183Z"
+  },
+  {
+    "id": "msg-084853",
+    "name": "Test",
+    "email": "t@t.com",
+    "subject": "Test",
+    "message": "Hello from test",
+    "status": "pending",
+    "createdAt": "2026-11-14T15:11:24.853Z"
+  },
+  {
+    "id": "cnt-101",
+    "name": "Ashish Agrawal",
+    "email": "ashish@example.com",
+    "subject": "Royal Dining Inquiry",
+    "message": "Looking forward to booking a banquet hall.",
+    "createdAt": "2026-11-14T19:00:00.000Z"
+  }
+]

@@ -1,0 +1,18 @@
+[
+  {
+    "id": "rev-001",
+    "name": "Aditya Singhania",
+    "dish": "Maharaja Indian Thali",
+    "rating": 5,
+    "comment": "Sublime dining experience. Royal flavors and unmatched hospitality.",
+    "date": "2026-11-10T18:00:00.000Z"
+  },
+  {
+    "id": "rev-002",
+    "name": "Meera Rao",
+    "dish": "Malai Chaap",
+    "rating": 5,
+    "comment": "Incredible texture and perfectly balanced spices.",
+    "date": "2026-11-12T19:30:00.000Z"
+  }
+]

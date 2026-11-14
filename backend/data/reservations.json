@@ -1,0 +1,25 @@
+[
+  {
+    "id": "res-654177",
+    "name": "Ashish Agrawal",
+    "phone": "9876543210",
+    "guests": "4 Guests",
+    "date": "2026-11-20",
+    "time": "8:00 PM",
+    "seating": "Terrace Dining",
+    "occasion": "Celebration",
+    "status": "confirmed",
+    "createdAt": "2026-11-14T15:37:34.177Z"
+  },
+  {
+    "id": "res-demo-01",
+    "name": "Ashish Agrawal",
+    "phone": "+91 9876543210",
+    "guests": "2 Guests (Intimate Table)",
+    "date": "2026-11-20",
+    "time": "08:30 PM (Prime Dinner)",
+    "seating": "Starlit Rooftop Terrace (Panoramic Skyline View)",
+    "occasion": "Family Royal Feast",
+    "createdAt": "2026-11-14T19:00:00.000Z"
+  }
+]
