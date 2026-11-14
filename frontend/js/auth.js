@@ -50,6 +50,12 @@ document.addEventListener('DOMContentLoaded', () => {
   if (tabSignIn) tabSignIn.addEventListener('click', () => setMode('signin'));
   if (tabRegister) tabRegister.addEventListener('click', () => setMode('register'));
 
+  // hint link below form also switches to register tab
+  document.getElementById('hint-register')?.addEventListener('click', (e) => {
+    e.preventDefault();
+    setMode('register');
+  });
+
   // Check if patron is already signed in
   const currentUser = localStorage.getItem('saffron_current_user');
   if (currentUser) {
