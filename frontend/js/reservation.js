@@ -117,6 +117,13 @@ if (form) {
     all.push(record);
     saveReservations(all);
 
+    // send reservation to backend server
+    fetch('/api/reservations', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(record)
+    }).catch(() => console.log('Backend offline, reservation saved locally'));
+
     // Auto download JSON
     downloadJson(all, 'reservations.json');
 

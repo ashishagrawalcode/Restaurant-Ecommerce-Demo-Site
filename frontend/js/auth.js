@@ -81,34 +81,36 @@ document.addEventListener('DOMContentLoaded', () => {
         return;
       }
 
-      // Save user session
-      const sessionData = {
-        email,
-        role: 'Royal Patron Member',
-        loggedInAt: new Date().toLocaleString()
-      };
-
-      localStorage.setItem('saffron_current_user', JSON.stringify(sessionData));
-
-      // Save user to registered users list
-      try {
-        const users = JSON.parse(localStorage.getItem('saffron_users') || '[]');
-        if (!users.some(u => u.email === email)) {
-          users.push(sessionData);
-          localStorage.setItem('saffron_users', JSON.stringify(users, null, 2));
-        }
-      } catch (e) {}
-
-      // Download user session JSON file
-      downloadJson(sessionData, 'user_session.json');
-
-      status.className = 'form-msg success';
-      status.innerHTML = `<strong>Welcome back!</strong><br>Successfully signed in as <code>${email}</code>. Downloaded user_session.json!`;
+      // post to backend auth API (falls back to local session if server offline)
+      status.className = 'form-msg';
+      status.textContent = 'Signing in...';
       form.appendChild(status);
 
-      setTimeout(() => {
-        form.reset();
-      }, 1500);
+      fetch('/api/auth/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, password })
+      })
+      .then(res => res.json().then(data => ({ ok: res.ok, data })))
+      .then(({ ok, data }) => {
+        const sessionData = ok && data.user
+          ? { email: data.user.email, name: data.user.name, role: data.user.role, loggedInAt: new Date().toLocaleString() }
+          : { email, role: 'Royal Patron Member', loggedInAt: new Date().toLocaleString() };
+        localStorage.setItem('saffron_current_user', JSON.stringify(sessionData));
+        downloadJson(sessionData, 'user_session.json');
+        status.className = 'form-msg success';
+        status.innerHTML = `<strong>Welcome back${sessionData.name ? ', ' + sessionData.name : ''}!</strong><br>Signed in as <code>${email}</code>. Downloaded user_session.json!`;
+        setTimeout(() => form.reset(), 1500);
+      })
+      .catch(() => {
+        // server offline — local fallback
+        const sessionData = { email, role: 'Royal Patron Member', loggedInAt: new Date().toLocaleString() };
+        localStorage.setItem('saffron_current_user', JSON.stringify(sessionData));
+        downloadJson(sessionData, 'user_session.json');
+        status.className = 'form-msg success';
+        status.innerHTML = `<strong>Welcome back!</strong><br>Signed in as <code>${email}</code> (offline mode).`;
+        setTimeout(() => form.reset(), 1500);
+      });
     });
   }
 

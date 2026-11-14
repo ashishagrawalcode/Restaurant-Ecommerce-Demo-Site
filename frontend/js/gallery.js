@@ -130,9 +130,13 @@ document.addEventListener('DOMContentLoaded', async () => {
   });
 
   try {
-    const response = await fetch("../data/menu.json");
-    if (!response.ok) {
-      throw new Error(`Menu request failed with status ${response.status}`);
+    // load menu from backend api or local backup
+    let response;
+    try {
+      response = await fetch("/api/menu");
+      if (!response.ok) throw new Error("API not ok");
+    } catch (err) {
+      response = await fetch("../data/menu.json");
     }
 
     const menuItems = await response.json();

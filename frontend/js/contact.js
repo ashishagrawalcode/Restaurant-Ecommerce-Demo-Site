@@ -87,6 +87,14 @@ if (form) {
     const all = getContacts();
     all.push(record);
     saveContacts(all);
+
+    // send message to backend server
+    fetch('/api/contact', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(record)
+    }).catch(() => console.log('Backend offline, message saved locally'));
+
     downloadJson(all, 'contacts.json');
 
     status.className = 'form-msg success';

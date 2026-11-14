@@ -201,9 +201,13 @@ document.addEventListener("DOMContentLoaded", async () => {
   renderCart();
 
   try {
-    const response = await fetch("../data/menu.json");
-    if (!response.ok) {
-      throw new Error(`Menu request failed with status ${response.status}`);
+    // load menu from backend api or local backup
+    let response;
+    try {
+      response = await fetch("/api/menu");
+      if (!response.ok) throw new Error("API not ok");
+    } catch (err) {
+      response = await fetch("../data/menu.json");
     }
 
     const menuItems = await response.json();
@@ -367,6 +371,13 @@ document.addEventListener("DOMContentLoaded", async () => {
       } catch (err) {
         console.error("Order save error:", err);
       }
+
+      // send order to backend server
+      fetch("/api/orders", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(orderData)
+      }).catch(() => console.log("Backend offline, order saved locally"));
 
       downloadJsonFile(orderData, `order_${orderRef}.json`);
 
