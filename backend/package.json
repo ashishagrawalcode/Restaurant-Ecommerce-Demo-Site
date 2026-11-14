@@ -1,0 +1,20 @@
+{
+  "name": "the-saffron-plate-backend",
+  "version": "1.0.0",
+  "description": "Backend API and static file server for The Saffron Plate",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "keywords": [
+    "restaurant",
+    "web-dev",
+    "evaluation",
+    "nodejs"
+  ],
+  "author": "Ashish Agrawal",
+  "license": "ISC",
+  "dependencies": {
+    "mongoose": "^9.12.1"
+  }
+}
