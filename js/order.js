@@ -28,6 +28,14 @@ function downloadJsonFile(data, filename) {
   URL.revokeObjectURL(a.href);
 }
 
+function resolveImgPath(path) {
+  if (!path) return '';
+  if (path.startsWith('http://') || path.startsWith('https://') || path.startsWith('../') || path.startsWith('/')) {
+    return path;
+  }
+  return '../' + path;
+}
+
 function showToast(msg) {
   const toast = document.getElementById("toast-notify");
   if (!toast) return;
@@ -79,7 +87,7 @@ function renderMenu() {
     return `
       <article class="food-card" data-id="${item.id}">
         <div class="card-media">
-          <img src="${item.image}" alt="${item.name}" loading="lazy">
+          <img src="${resolveImgPath(item.image)}" alt="${item.name}" loading="lazy">
           <span class="card-badge">${item.badge}</span>
         </div>
         <div class="card-body">
@@ -163,7 +171,7 @@ function renderCart() {
     if (listEl) {
       listEl.innerHTML = cart.map(item => `
         <div class="cart-item-row">
-          <img src="${item.image}" alt="${item.name}">
+          <img src="${resolveImgPath(item.image)}" alt="${item.name}">
           <div class="cart-item-info">
             <h4>${item.name}</h4>
             <span class="cart-item-price">₹${item.price} each</span>
@@ -193,7 +201,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   renderCart();
 
   try {
-    const response = await fetch("menu.json");
+    const response = await fetch("../data/menu.json");
     if (!response.ok) {
       throw new Error(`Menu request failed with status ${response.status}`);
     }

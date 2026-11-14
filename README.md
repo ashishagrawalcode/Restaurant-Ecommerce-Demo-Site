@@ -68,28 +68,41 @@ The color scheme is crafted to evoke royal Indian heritage, warm hospitality, an
 
 ```
 assessment/
-├── index.html          # Main Homepage & Menu Showcase
-├── index.js            # Homepage menu highlights loaded from menu.json
-├── styles.css          # Core Design System & Global Styles
-├── order.html          # Interactive Online Ordering & E-Commerce Cart
-├── order.css           # Online Order Page Styles
-├── order.js            # Menu Filtering, Cart State & Checkout Logic
-├── menu.json           # Shared menu catalog loaded by the homepage, order page, and gallery
-├── gallery.html        # Dining Gallery, Ambiance & Architecture
-├── gallery.css         # Gallery & Lightbox Styles
-├── gallery.js          # Category Filter, Fullscreen Lightbox & Navigation
-├── about.html          # About Us & Restaurant Heritage
-├── about.css           # About Page Styles
-├── reservation.html    # Table Reservation Form
-├── reservation.css     # Reservation Page Styles
-├── auth.html           # Guest Account Access / Sign In
-├── auth.css            # Auth Page Styles
-├── contact.html        # Contact & Inquiries Page
-├── contact.css         # Contact Page Styles
-├── team.html           # Project Team Showcase Page
-├── team.css            # Team Page Styles
-├── README.md           # Project Documentation
-└── images/             # High-Resolution Photography Assets
+├── index.html            # Main Entry Point & Homepage
+├── README.md             # Project Documentation
+├── .gitignore            # Git ignore rules
+├── css/                  # Modular & Global Stylesheets
+│   ├── styles.css        # Design System & Global Styles
+│   ├── about.css         # About Page Styles
+│   ├── auth.css          # Auth Page Styles
+│   ├── contact.css       # Contact Page Styles
+│   ├── gallery.css       # Gallery & Lightbox Styles
+│   ├── order.css         # Online Order Page Styles
+│   ├── reservation.css   # Reservation Page Styles
+│   └── team.css          # Team Page Styles
+├── js/                   # Frontend JavaScript Modules
+│   ├── index.js          # Homepage menu highlights
+│   ├── nav.js            # Sticky navbar & mobile drawer
+│   ├── order.js          # Menu filtering, cart & checkout
+│   ├── reservation.js    # Table reservation validation
+│   ├── contact.js        # Contact form handling
+│   ├── gallery.js        # Filter & fullscreen lightbox
+│   ├── team.js           # Team bios modal
+│   └── auth.js           # Guest sign-in & session export
+├── data/                 # JSON Data Catalogs
+│   └── menu.json         # Shared menu catalog loaded across pages
+├── pages/                # Multi-Page Views
+│   ├── about.html        # About Us & Restaurant Heritage
+│   ├── auth.html         # Guest Account Access / Sign In
+│   ├── contact.html      # Contact & Inquiries Page
+│   ├── gallery.html      # Dining Gallery, Ambiance & Architecture
+│   ├── order.html        # Interactive Online Ordering & Cart
+│   ├── reservation.html  # Table Reservation Form
+│   └── team.html         # Project Team Showcase Page
+├── images/               # High-Resolution Photography Assets
+└── docs/                 # Documentation & Architecture Guides
+    ├── ImplementationPlan.md
+    └── ProjectStructure.md
 ```
 
 ---

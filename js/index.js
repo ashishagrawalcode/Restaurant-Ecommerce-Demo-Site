@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   if (!grid) return;
 
   try {
-    const response = await fetch("menu.json");
+    const response = await fetch("data/menu.json");
     if (!response.ok) {
       throw new Error(`Menu request failed with status ${response.status}`);
     }
@@ -51,7 +51,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       price.textContent = `₹${item.price}`;
 
       const orderLink = document.createElement("a");
-      orderLink.href = "order.html";
+      orderLink.href = "pages/order.html";
       orderLink.className = "btn solid";
       orderLink.style.cssText = "padding: 8px 18px; font-size: 11px;";
       orderLink.textContent = "Order Dish";

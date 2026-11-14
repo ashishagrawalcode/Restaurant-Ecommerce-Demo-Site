@@ -276,7 +276,7 @@ img {
   align-items: center;
   background:
     linear-gradient(to right, rgba(23, 23, 23, 0.98) 0%, rgba(23, 23, 23, 0.82) 50%, rgba(23, 23, 23, 0.4) 100%),
-    url('images/hero_dish.jpg') center right / cover no-repeat;
+    url('../images/hero_dish.jpg') center right / cover no-repeat;
 }
 
 .hero-main-content {

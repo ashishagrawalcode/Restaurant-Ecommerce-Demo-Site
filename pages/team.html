@@ -3,12 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>About Us &amp; Heritage — The Saffron Plate</title>
+  <title>Our Team — The Saffron Plate</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Cormorant+Garamond:ital,wght@0,500;1,400;1,600&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css">
-  <link rel="stylesheet" href="about.css">
+  <link rel="stylesheet" href="../css/styles.css">
+  <link rel="stylesheet" href="../css/team.css">
 </head>
 <body>
   <!-- Navbar -->
@@ -16,17 +16,17 @@
     <nav class="navbar-overlay">
       <div class="nav-inner">
         <div class="nav-menu-list left">
-          <a href="index.html">Home</a>
+          <a href="../index.html">Home</a>
           <a href="order.html">Menu &amp; Order</a>
           <a href="reservation.html">Reservations</a>
         </div>
-        <a href="index.html" class="brand-center">
+        <a href="../index.html" class="brand-center">
           <span class="brand-name">THE SAFFRON PLATE</span>
           <span class="brand-sub">FINE DINING &amp; GOURMET KITCHEN</span>
         </a>
         <div class="nav-menu-list right">
-          <a href="about.html" class="active">About Us</a>
-          <a href="team.html">Our Team</a>
+          <a href="about.html">About Us</a>
+          <a href="team.html" class="active">Our Team</a>
           <a href="contact.html">Contact</a>
           <a href="auth.html" class="nav-auth-btn">Sign In</a>
         </div>
@@ -35,38 +35,56 @@
         </button>
       </div>
       <div class="mobile-nav-menu" id="mobileNavMenu">
-        <a href="index.html">Home</a>
+        <a href="../index.html">Home</a>
         <a href="order.html">Menu &amp; Order</a>
         <a href="reservation.html">Reservations</a>
-        <a href="about.html" class="active">Our Heritage</a>
-        <a href="team.html">Culinary Team</a>
+        <a href="about.html">Our Heritage</a>
+        <a href="team.html" class="active">Culinary Team</a>
         <a href="contact.html">Contact Us</a>
         <a href="auth.html">Sign In</a>
       </div>
     </nav>
   </header>
 
-  <!-- About content -->
-  <main class="about-container">
-    <div class="about-header">
-      <span class="eyebrow">OUR STORY</span>
-      <h1>HERITAGE &amp; ARTISTRY</h1>
-      <p>Discover our devotion to authentic culinary traditions, time-honored heritage recipes, and pure vegetarian fine dining.</p>
+  <!-- Team members -->
+  <main class="team-container">
+    <div class="team-head">
+      <span class="eyebrow">PROJECT CONTRIBUTORS</span>
+      <h2>OUR TEAM</h2>
+      <p class="team-sub">Meet the team behind The Saffron Plate experience, culinary curation, and design.</p>
     </div>
 
-    <div class="about-card">
-      <div class="about-card-text">
-        <h2>OUR HERITAGE</h2>
-        <p>Founded on the principle of fine vegetarian dining, <strong>The Saffron Plate</strong> combines authentic royal court recipes from Awadh, Mewar, and Kashmir with hand-ground spices and organic ingredients.</p>
+    <div class="team-grid">
+      <div class="team-card">
+        <div class="team-img-wrap">
+          <img src="../images/vivek_yadav.jpg" alt="Vivek Yadav" loading="lazy">
+        </div>
+        <h3>Vivek Yadav</h3>
+        <p>Team Member</p>
       </div>
-      <img src="images/indian_thali.jpg" alt="Heritage Dining">
-    </div>
 
-    <div class="about-card">
-      <img src="images/chef_portrait.jpg" alt="Executive Chef">
-      <div class="about-card-text">
-        <h2>EXECUTIVE CHEF</h2>
-        <p>Led by Chef Vikramaditya, our culinary team celebrates centuries-old recipes prepared with artisanal craft, pure cold-pressed oils, and seasonal flavors.</p>
+      <div class="team-card">
+        <div class="team-img-wrap">
+          <img src="../images/ashish_agrawal.jpg" alt="Ashish Agrawal" loading="lazy">
+        </div>
+        <h3>Ashish Agrawal</h3>
+        <p>Team Member</p>
+      </div>
+
+      <div class="team-card">
+        <div class="team-img-wrap">
+          <img src="../images/shreya_chaudhary.jpg" alt="Shreya Chaudhary" loading="lazy">
+        </div>
+        <h3>Shreya Chaudhary</h3>
+        <p>Team Member</p>
+      </div>
+
+      <div class="team-card">
+        <div class="team-img-wrap">
+          <img src="../images/khush_raghav.jpg" alt="Khush Raghav" loading="lazy">
+        </div>
+        <h3>Khush Raghav</h3>
+        <p>Team Member</p>
       </div>
     </div>
   </main>
@@ -80,7 +98,7 @@
         <p>100% Pure Vegetarian Royal Dining. Greater Kailash II, New Delhi.</p>
       </div>
       <div class="footer-links">
-        <a href="index.html">Home</a>
+        <a href="../index.html">Home</a>
         <a href="order.html">Menu &amp; Order</a>
         <a href="reservation.html">Reservations</a>
         <a href="gallery.html">Gallery</a>
@@ -95,6 +113,7 @@
     </div>
   </footer>
 
-  <script src="nav.js"></script>
+  <script src="../js/nav.js"></script>
+  <script src="../js/team.js"></script>
 </body>
 </html>

@@ -1,21 +1,21 @@
 // The Saffron Plate - Gallery & Lightbox Logic
 document.addEventListener('DOMContentLoaded', async () => {
   const STATIC_ITEMS = [
-    { id: 'g1', title: 'The Starlit Rooftop Terrace', cat: 'terrace', badge: 'Terrace & View', img: 'images/terrace_dining.jpg', desc: 'Panoramic open-air dining under twilight skies with candle-lit teak tables and ambient live sitar.' },
+    { id: 'g1', title: 'The Starlit Rooftop Terrace', cat: 'terrace', badge: 'Terrace & View', img: '../images/terrace_dining.jpg', desc: 'Panoramic open-air dining under twilight skies with candle-lit teak tables and ambient live sitar.' },
     { id: 'g2', title: 'Skyline Twilight Veranda', cat: 'terrace', badge: 'Panoramic Vista', img: 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1200&q=80', desc: 'Sweeping 360-degree views over South Delhi canopies, illuminated under warm golden hour hues.' },
     { id: 'g3', title: 'Candlelit Fountain Courtyard', cat: 'terrace', badge: 'Open Courtyard', img: 'https://images.unsplash.com/photo-1578474846511-04ba529f0b88?auto=format&fit=crop&w=1200&q=80', desc: 'Central marble fountain rippling amidst hand-carved jaali screens, floating lotus candles, and jasmine.' },
     { id: 'g4', title: 'The Maharaja Grand Dining Hall', cat: 'architecture', badge: 'Palace Hall', img: 'https://images.unsplash.com/photo-1550966871-3ed3cdb5ed0c?auto=format&fit=crop&w=1200&q=80', desc: 'Imperial banquet hall crowned with Venetian crystal chandeliers, hand-gilded arches, and Italian marble inlays.' },
     { id: 'g5', title: 'Sandstone Jaali Colonnade', cat: 'architecture', badge: 'Heritage Design', img: 'https://images.unsplash.com/photo-1590381105924-c72589b9ef3f?auto=format&fit=crop&w=1200&q=80', desc: 'Sandstone archways and geometric jaali screens casting dramatic light patterns across imperial walkways.' },
     { id: 'g6', title: 'Ambient Royal Archways', cat: 'architecture', badge: 'Palace Corridor', img: 'https://images.unsplash.com/photo-1543007630-9710e4a00a20?auto=format&fit=crop&w=1200&q=80', desc: 'Serene corridors with illuminated fluted pillars, antique brass mashaals, and traditional royal motifs.' },
-    { id: 'g7', title: 'The Maharaja Imperial Suite', cat: 'suites', badge: 'Royal Suite', img: 'images/private_dining.jpg', desc: 'Private dining sanctum featuring hand-carved teak woodwork, acoustic seclusion, and dedicated royal butler.' },
+    { id: 'g7', title: 'The Maharaja Imperial Suite', cat: 'suites', badge: 'Royal Suite', img: '../images/private_dining.jpg', desc: 'Private dining sanctum featuring hand-carved teak woodwork, acoustic seclusion, and dedicated royal butler.' },
     { id: 'g8', title: 'The Private Jharokha Alcove', cat: 'suites', badge: 'Intimate Dining', img: 'https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=1200&q=80', desc: 'Romantic private alcove dressed in raw silk drapery, low royal seating, and dedicated sommelier concierge.' },
     { id: 'g9', title: 'Mirror-Inlaid Private Sanctum', cat: 'suites', badge: 'Sheesh Chamber', img: 'https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=1200&q=80', desc: 'Belgian mirror inlays multiplying candlelight, creating an ethereal setting for celebratory banquets.' },
     { id: 'g10', title: 'The Saffron Velvet Evening Lounge', cat: 'lounge', badge: 'Velvet Lounge', img: 'https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?auto=format&fit=crop&w=1200&q=80', desc: 'Amber lighting, hand-knotted Persian silk carpets, and plush divans with acoustic live sitar performances.' },
     { id: 'g11', title: 'Botanical Saffron & Mocktail Bar', cat: 'lounge', badge: 'Beverage Atelier', img: 'https://images.unsplash.com/photo-1572116469696-31de0f17cc34?auto=format&fit=crop&w=1200&q=80', desc: 'Artisanal mocktails crafted with handpicked Kashmiri saffron, mountain elderflower, and fresh citrus.' },
     { id: 'g12', title: 'Evening Candlelit Welcome Pathway', cat: 'lounge', badge: 'Ambiance Vibe', img: 'https://images.unsplash.com/photo-1511795409834-ef04bbd61622?auto=format&fit=crop&w=1200&q=80', desc: 'A grand entrance flanked by brass oil lanterns, fresh rose petal urns, and aromatic saffron incense.' },
     { id: 'g13', title: 'Live Charcoal Tandoor & Handi Theater', cat: 'culinary', badge: 'Open Kitchen', img: 'https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=1200&q=80', desc: 'Open kitchen theater where bawarchis roast kebabs over hardwood embers and slow-simmer copper handis.' },
-    { id: 'g14', title: 'Master Chef Vikramaditya', cat: 'culinary', badge: 'Culinary Master', img: 'images/chef_portrait.jpg', desc: 'Our visionary executive chef preserving ancestral Awadhi and Mewari royal court recipes with modern finesse.' },
-    { id: 'g15', title: 'The Royal Saffron Crown Presentation', cat: 'culinary', badge: 'Signature Dish', img: 'images/hero_dish.jpg', desc: 'A royal vegetarian centerpiece garnished with 24k edible gold vark, saffron threads, and herb oils.' }
+    { id: 'g14', title: 'Master Chef Vikramaditya', cat: 'culinary', badge: 'Culinary Master', img: '../images/chef_portrait.jpg', desc: 'Our visionary executive chef preserving ancestral Awadhi and Mewari royal court recipes with modern finesse.' },
+    { id: 'g15', title: 'The Royal Saffron Crown Presentation', cat: 'culinary', badge: 'Signature Dish', img: '../images/hero_dish.jpg', desc: 'A royal vegetarian centerpiece garnished with 24k edible gold vark, saffron threads, and herb oils.' }
   ];
   let items = STATIC_ITEMS;
 
@@ -130,7 +130,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   });
 
   try {
-    const response = await fetch("menu.json");
+    const response = await fetch("../data/menu.json");
     if (!response.ok) {
       throw new Error(`Menu request failed with status ${response.status}`);
     }
@@ -145,7 +145,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       title: item.name,
       cat: "culinary",
       badge: item.badge,
-      img: item.image,
+      img: (item.image && !item.image.startsWith('http') && !item.image.startsWith('../')) ? ('../' + item.image) : item.image,
       desc: item.description
     }));
     items = [...STATIC_ITEMS, ...galleryMenuItems];
