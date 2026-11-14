@@ -28,12 +28,16 @@ async function connectDB() {
     const orderSchema = new mongoose.Schema(require('../models/Order'), { timestamps: true });
     const reservationSchema = new mongoose.Schema(require('../models/Reservation'), { timestamps: true });
     const contactSchema = new mongoose.Schema(require('../models/Contact'), { timestamps: true });
+    const userSchema = new mongoose.Schema(require('../models/User'), { timestamps: true });
+    const reviewSchema = new mongoose.Schema(require('../models/Review'), { timestamps: true });
 
     models = {
       Menu: mongoose.models.Menu || mongoose.model('Menu', menuSchema),
       Order: mongoose.models.Order || mongoose.model('Order', orderSchema),
       Reservation: mongoose.models.Reservation || mongoose.model('Reservation', reservationSchema),
-      Contact: mongoose.models.Contact || mongoose.model('Contact', contactSchema)
+      Contact: mongoose.models.Contact || mongoose.model('Contact', contactSchema),
+      User: mongoose.models.User || mongoose.model('User', userSchema),
+      Review: mongoose.models.Review || mongoose.model('Review', reviewSchema)
     };
 
     return true;
