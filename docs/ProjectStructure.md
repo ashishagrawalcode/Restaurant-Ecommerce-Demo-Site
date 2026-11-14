@@ -1,51 +1,64 @@
 # Project Structure
 
-This document describes the directory layout of the **Restaurant‑Ecommerce‑Demo‑Site** project used for the 2nd Evaluation (frontend‑only).
+This document describes the directory layout of **The Saffron Plate** fullstack restaurant web application.
 
 ```
 assessment/
-├── index.html            # Main Entry Point & Homepage
-├── README.md             # Project overview & documentation
-├── .gitignore            # Git ignore configuration
-├── css/                  # Stylesheets for global styles and specific views
-│   ├── styles.css        # Global design system & layout styles
-│   ├── about.css         # Styles for about page
-│   ├── auth.css          # Styles for sign-in / registration
-│   ├── contact.css       # Styles for contact page
-│   ├── gallery.css       # Styles for gallery & lightbox
-│   ├── order.css         # Styles for order catalog & checkout
-│   ├── reservation.css   # Styles for table reservation form
-│   └── team.css          # Styles for project team page
-├── js/                   # Client-side JavaScript modules & logic
-│   ├── index.js          # Homepage featured menu loading & interaction
-│   ├── nav.js            # Sticky navigation & mobile hamburger menu
-│   ├── order.js          # Online ordering, cart management & checkout
-│   ├── reservation.js    # Table reservation validation & export
-│   ├── contact.js        # Contact form validation & JSON persistence
-│   ├── gallery.js        # Gallery filtering & fullscreen lightbox
-│   ├── team.js           # Team member modal preview
-│   └── auth.js           # Guest sign-in validation & export
-├── data/                 # Data catalogs and JSON resources
-│   └── menu.json         # Shared menu items catalog
-├── pages/                # Secondary pages and views
-│   ├── about.html        # Heritage & story page
-│   ├── auth.html         # Guest account access page
-│   ├── contact.html      # Inquiries & location contact page
-│   ├── gallery.html      # Dining atmosphere & interior gallery
-│   ├── order.html        # Interactive menu catalog & cart page
-│   ├── reservation.html  # Table booking page
-│   └── team.html         # Project team showcase page
-├── images/               # High-resolution dish and ambiance photography
-└── docs/                 # Implementation guides and architecture docs
-    ├── ImplementationPlan.md
-    └── ProjectStructure.md
+├── README.md                 # Project overview & documentation
+├── .gitignore                # Git ignore configuration
+├── backend/                  # Node.js REST API & static server
+│   ├── package.json          # Node project scripts & metadata
+│   ├── server.js             # Core HTTP server & primary API routes (Ashish)
+│   ├── data/                 # JSON persistence store
+│   │   ├── menu.json         # Master menu catalog
+│   │   ├── orders.json       # Live customer orders
+│   │   ├── reservations.json # Table booking records
+│   │   ├── contacts.json     # Contact inquiries
+│   │   ├── users.json        # Patron accounts
+│   │   └── reviews.json      # Patron feedback & ratings
+│   └── routes/               # Modular route files for teammates
+│       ├── authRoutes.js     # User authentication module (Shreya)
+│       ├── contactRoutes.js  # Inquiry admin module (Vivek)
+│       └── reviewRoutes.js   # Customer reviews module (Khush)
+├── frontend/                 # Client-side user interface
+│   ├── index.html            # Main Entry Point & Homepage
+│   ├── css/                  # All CSS stylesheets
+│   │   ├── styles.css        # Global styles & design system
+│   │   ├── about.css         # Styles for about page
+│   │   ├── auth.css          # Styles for sign-in / registration
+│   │   ├── contact.css       # Styles for contact page
+│   │   ├── gallery.css       # Styles for gallery & lightbox
+│   │   ├── order.css         # Styles for ordering & cart
+│   │   ├── reservation.css   # Styles for table reservation form
+│   │   └── team.css          # Styles for project team showcase
+│   ├── js/                   # Client-side JavaScript modules
+│   │   ├── index.js          # Homepage menu preview loader
+│   │   ├── nav.js            # Sticky navigation & mobile drawer
+│   │   ├── order.js          # Menu filtering, cart & checkout
+│   │   ├── reservation.js    # Table reservation validation
+│   │   ├── contact.js        # Contact form validation & submission
+│   │   ├── gallery.js        # Gallery filtering & fullscreen lightbox
+│   │   ├── team.js           # Team member modal preview
+│   │   └── auth.js           # Guest sign-in & session handling
+│   ├── data/                 # Client menu backup catalog
+│   │   └── menu.json
+│   ├── pages/                # Multi-page application views
+│   │   ├── about.html        # Restaurant heritage & story
+│   │   ├── auth.html         # Patron sign-in & register
+│   │   ├── contact.html      # Contact form & location information
+│   │   ├── gallery.html      # Ambiance & architectural gallery
+│   │   ├── order.html        # Interactive menu catalog & cart
+│   │   ├── reservation.html  # Table booking form
+│   │   └── team.html         # Project team contributors
+│   └── images/               # High-resolution dish and team photography
+└── docs/                     # Project documentation & guidelines
+    ├── ImplementationPlan.md # 4-person task distribution & plan
+    └── ProjectStructure.md   # This architecture guide
 ```
 
-### Key Points
-- `index.html` sits at the root as the primary entry point for web servers and static hosts.
-- All subpages are cleanly grouped under `pages/`.
-- All CSS stylesheets are grouped inside `css/`.
-- All client-side JavaScript files are grouped inside `js/`.
-- Static data files (like `menu.json`) reside inside `data/`.
-- Image assets reside in `images/`.
-- Documentation files reside in `docs/`.
+### Running the Application
+```powershell
+cd backend
+node server.js
+```
+The server will start at `http://localhost:5000/` and serve the frontend files automatically while providing full REST API capabilities.

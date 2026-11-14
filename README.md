@@ -68,68 +68,80 @@ The color scheme is crafted to evoke royal Indian heritage, warm hospitality, an
 
 ```
 assessment/
-├── index.html            # Main Entry Point & Homepage
-├── README.md             # Project Documentation
-├── .gitignore            # Git ignore rules
-├── css/                  # Modular & Global Stylesheets
-│   ├── styles.css        # Design System & Global Styles
-│   ├── about.css         # About Page Styles
-│   ├── auth.css          # Auth Page Styles
-│   ├── contact.css       # Contact Page Styles
-│   ├── gallery.css       # Gallery & Lightbox Styles
-│   ├── order.css         # Online Order Page Styles
-│   ├── reservation.css   # Reservation Page Styles
-│   └── team.css          # Team Page Styles
-├── js/                   # Frontend JavaScript Modules
-│   ├── index.js          # Homepage menu highlights
-│   ├── nav.js            # Sticky navbar & mobile drawer
-│   ├── order.js          # Menu filtering, cart & checkout
-│   ├── reservation.js    # Table reservation validation
-│   ├── contact.js        # Contact form handling
-│   ├── gallery.js        # Filter & fullscreen lightbox
-│   ├── team.js           # Team bios modal
-│   └── auth.js           # Guest sign-in & session export
-├── data/                 # JSON Data Catalogs
-│   └── menu.json         # Shared menu catalog loaded across pages
-├── pages/                # Multi-Page Views
-│   ├── about.html        # About Us & Restaurant Heritage
-│   ├── auth.html         # Guest Account Access / Sign In
-│   ├── contact.html      # Contact & Inquiries Page
-│   ├── gallery.html      # Dining Gallery, Ambiance & Architecture
-│   ├── order.html        # Interactive Online Ordering & Cart
-│   ├── reservation.html  # Table Reservation Form
-│   └── team.html         # Project Team Showcase Page
-├── images/               # High-Resolution Photography Assets
-└── docs/                 # Documentation & Architecture Guides
-    ├── ImplementationPlan.md
-    └── ProjectStructure.md
+├── README.md                 # Project Documentation
+├── .gitignore                # Git ignore rules
+├── backend/                  # Node.js REST API & static server
+│   ├── package.json          # Node project scripts & metadata
+│   ├── server.js             # Core HTTP server & primary API routes (Ashish)
+│   ├── data/                 # JSON persistence store
+│   │   ├── menu.json         # Master menu catalog
+│   │   ├── orders.json       # Live customer orders
+│   │   ├── reservations.json # Table booking records
+│   │   ├── contacts.json     # Contact inquiries
+│   │   ├── users.json        # Patron accounts
+│   │   └── reviews.json      # Patron feedback & ratings
+│   └── routes/               # Modular route files for teammates
+│       ├── authRoutes.js     # User authentication module (Shreya)
+│       ├── contactRoutes.js  # Inquiry admin module (Vivek)
+│       └── reviewRoutes.js   # Customer reviews module (Khush)
+├── frontend/                 # Client-side user interface
+│   ├── index.html            # Main Entry Point & Homepage
+│   ├── css/                  # All CSS stylesheets
+│   │   ├── styles.css        # Global styles & design system
+│   │   ├── about.css         # Styles for about page
+│   │   ├── auth.css          # Styles for sign-in / registration
+│   │   ├── contact.css       # Styles for contact page
+│   │   ├── gallery.css       # Styles for gallery & lightbox
+│   │   ├── order.css         # Styles for ordering & cart
+│   │   ├── reservation.css   # Styles for table reservation form
+│   │   └── team.css          # Styles for project team showcase
+│   ├── js/                   # Client-side JavaScript modules
+│   │   ├── index.js          # Homepage menu preview loader
+│   │   ├── nav.js            # Sticky navigation & mobile drawer
+│   │   ├── order.js          # Menu filtering, cart & checkout
+│   │   ├── reservation.js    # Table reservation validation
+│   │   ├── contact.js        # Contact form validation & submission
+│   │   ├── gallery.js        # Gallery filtering & fullscreen lightbox
+│   │   ├── team.js           # Team member modal preview
+│   │   └── auth.js           # Guest sign-in & session handling
+│   ├── data/                 # Client menu backup catalog
+│   │   └── menu.json
+│   ├── pages/                # Multi-page application views
+│   │   ├── about.html        # Restaurant heritage & story
+│   │   ├── auth.html         # Patron sign-in & register
+│   │   ├── contact.html      # Contact form & location information
+│   │   ├── gallery.html      # Ambiance & architectural gallery
+│   │   ├── order.html        # Interactive menu catalog & cart
+│   │   ├── reservation.html  # Table booking form
+│   │   └── team.html         # Project team contributors
+│   └── images/               # High-resolution dish and team photography
+└── docs/                     # Project documentation & guidelines
+    ├── ImplementationPlan.md # 4-person task distribution & plan
+    └── ProjectStructure.md   # Architecture & directory guide
 ```
 
 ---
 
 ## 👥 Project Team
 
-- **Vivek Yadav**
-- **Ashish Agrawal**
-- **Shreya Chaudhary**
-- **Khush Raghav**
+- **Ashish Agrawal** (Fullstack Lead, Core Backend Server, Orders & Reservations Architecture)
+- **Shreya Chaudhary** (Authentication & User Account Management)
+- **Vivek Yadav** (Contact Inquiries & Admin Review)
+- **Khush Raghav** (Patron Reviews & Dietary Feedback)
 
 ---
 
 ## 💻 Getting Started
 
-To run this project locally:
+To run both frontend and backend locally with one command:
 
-1. **Clone the repository**:
+1. **Open terminal in `backend/`**:
    ```bash
-   git clone https://github.com/SHREYA-421/Restaurant-Ecommerce-Demo-Site.git
+   cd backend
+   node server.js
    ```
-2. **Navigate into the directory**:
-   ```bash
-   cd Restaurant-Ecommerce-Demo-Site
-   ```
-3. **Start a local web server** (for example, with the VS Code Live Server extension), then open `index.html`:
-   - The order page fetches its menu from `menu.json`, so it must be served over HTTP rather than opened directly as a local file.
+2. **Open browser**:
+   - `http://localhost:5000/` (Loads the full website and connects directly to backend REST APIs)
 
 ---
 
