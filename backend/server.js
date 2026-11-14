@@ -10,7 +10,7 @@ const loadEnv = require('./config/env');
 loadEnv();
 
 // database connection setup (mongodb with json fallback)
-const { connectDB, getDbStatus } = require('./config/db');
+const { connectDB, getDbStatus, isConnected, getModels } = require('./config/db');
 connectDB();
 
 // import route modules for teammates
@@ -293,21 +293,21 @@ const server = http.createServer(async (req, res) => {
   // Shreya: Auth routes (/api/auth/*)
   if (pathname.startsWith('/api/auth')) {
     if (authRoutes && typeof authRoutes.handle === 'function') {
-      return authRoutes.handle(req, res, pathname, method, body, { readJson, writeJson, sendJson });
+      return authRoutes.handle(req, res, pathname, method, body, { readJson, writeJson, sendJson, isConnected, getModels });
     }
   }
 
   // Vivek: Contact inquiries admin routes (/api/admin/contacts/*)
   if (pathname.startsWith('/api/admin/contacts')) {
     if (contactRoutes && typeof contactRoutes.handle === 'function') {
-      return contactRoutes.handle(req, res, pathname, method, body, { readJson, writeJson, sendJson });
+      return contactRoutes.handle(req, res, pathname, method, body, { readJson, writeJson, sendJson, isConnected, getModels });
     }
   }
 
   // Khush: Reviews & Ratings routes (/api/reviews/*)
   if (pathname.startsWith('/api/reviews')) {
     if (reviewRoutes && typeof reviewRoutes.handle === 'function') {
-      return reviewRoutes.handle(req, res, pathname, method, body, { readJson, writeJson, sendJson });
+      return reviewRoutes.handle(req, res, pathname, method, body, { readJson, writeJson, sendJson, isConnected, getModels });
     }
   }
 

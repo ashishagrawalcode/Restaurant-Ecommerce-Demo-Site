@@ -1,15 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Sign In &amp; Account — The Saffron Plate</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Cormorant+Garamond:ital,wght@0,500;1,400;1,600&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Cormorant+Garamond:ital,wght@0,500;1,400;1,600&family=Jost:wght@300;400;500;600&display=swap"
+    rel="stylesheet">
   <link rel="stylesheet" href="../css/styles.css">
   <link rel="stylesheet" href="../css/auth.css">
 </head>
+
 <body>
   <!-- Navbar -->
   <header class="site-header">
@@ -46,19 +50,33 @@
     </nav>
   </header>
 
-  <!-- Sign in form -->
+  <!-- Sign in & Registration form -->
   <main class="auth-container">
     <div class="auth-card">
-      <div style="text-align: center; margin-bottom: 24px;">
+      <div style="text-align: center; margin-bottom: 20px;">
         <span class="eyebrow">ROYAL PATRON ACCESS</span>
-        <h2>ACCOUNT SIGN IN</h2>
-        <p style="font-size: 13px; color: var(--body-text); margin-top: 6px;">Sign in to access your table bookings, order history, and exclusive member privileges.</p>
+        <h2 id="auth-title">ACCOUNT SIGN IN</h2>
+        <p id="auth-subtitle" style="font-size: 13px; color: var(--body-text); margin-top: 6px;">Sign in to access your
+          table bookings, order history, and exclusive member privileges.</p>
+      </div>
+
+      <!-- Auth mode tabs -->
+      <div class="auth-tabs"
+        style="display: flex; gap: 8px; margin-bottom: 20px; border-bottom: 1px solid var(--border); padding-bottom: 10px;">
+        <button type="button" id="tab-signin" class="btn small"
+          style="flex: 1; background: var(--gold); color: #111;">Sign In</button>
+        <button type="button" id="tab-register" class="btn small outline" style="flex: 1;">Create Account</button>
       </div>
 
       <form class="auth-form" action="#" method="post">
+        <div class="form-group" id="group-name" style="display: none;">
+          <label for="name">Full Name *</label>
+          <input type="text" id="name" class="form-input" placeholder="e.g. Shreya Chaudhary">
+        </div>
+
         <div class="form-group">
           <label for="email">Email Address *</label>
-          <input type="email" id="email" class="form-input" placeholder="guest@domain.com" required>
+          <input type="email" id="email" class="form-input" placeholder="shreya@gmail.com" required>
         </div>
 
         <div class="form-group">
@@ -66,8 +84,14 @@
           <input type="password" id="password" class="form-input" placeholder="••••••••" required>
         </div>
 
-        <button type="submit" class="auth-btn">SIGN IN</button>
-        <button type="button" id="export-user-json" class="btn outline" style="width: 100%; margin-top: 8px;">EXPORT USER SESSION (.JSON)</button>
+        <button type="submit" id="auth-submit-btn" class="auth-btn">SIGN IN</button>
+        <button type="button" id="export-user-json" class="btn outline" style="width: 100%; margin-top: 8px;">Export
+          Session (.JSON)</button>
+
+        <p style="text-align: center; font-size: 12px; color: var(--body-text); margin-top: 16px;">
+          New here? Switch to <a href="#" id="hint-register"
+            style="color: var(--gold); text-decoration: underline;">Create Account</a> above.
+        </p>
       </form>
     </div>
   </main>
@@ -99,4 +123,5 @@
   <script src="../js/nav.js"></script>
   <script src="../js/auth.js"></script>
 </body>
+
 </html>
