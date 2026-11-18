@@ -11,6 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   let currentFilter = 'all';
   let toastTimer = null;
+  let cachedInquiries = [];
 
   // Show toast notification
   function showToast(message, isSuccess = true) {
@@ -54,7 +55,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  // Fetch inquiries from backend API
+  // Load inquiries: uses backend API with static/localStorage fallback for GitHub Pages
   async function loadInquiries(filter = currentFilter) {
     if (tableBody) {
       tableBody.innerHTML = `
@@ -66,42 +67,76 @@ document.addEventListener('DOMContentLoaded', () => {
       `;
     }
 
+    let inquiries = [];
+    let isLiveBackend = false;
+
+    // 1. Try Live Backend API
     try {
       const url = filter && filter !== 'all'
         ? `/api/admin/contacts/list?status=${encodeURIComponent(filter)}`
         : '/api/admin/contacts/list';
 
       const response = await fetch(url);
-      if (!response.ok) {
-        throw new Error(`Server returned HTTP ${response.status}`);
+      if (response.ok) {
+        const data = await response.json();
+        inquiries = data.inquiries || [];
+        isLiveBackend = true;
       }
-
-      const data = await response.json();
-      const inquiries = data.inquiries || [];
-      const total = typeof data.total === 'number' ? data.total : inquiries.length;
-
-      // Update count badge
-      if (countChip) {
-        const label = filter === 'all' ? 'Total' : filter.charAt(0).toUpperCase() + filter.slice(1);
-        countChip.textContent = `${total} ${label} Inquir${total !== 1 ? 'ies' : 'y'}`;
-      }
-
-      renderTable(inquiries);
-    } catch (err) {
-      console.error('Failed to load inquiries:', err);
-      if (tableBody) {
-        tableBody.innerHTML = `
-          <tr>
-            <td colspan="7" style="text-align: center; padding: 40px; color: #f56c6c;">
-              Unable to load inquiries from server (${escapeHtml(err.message)}).<br>
-              <button type="button" class="btn-refresh" style="margin-top: 12px;" onclick="window.location.reload()">Retry</button>
-            </td>
-          </tr>
-        `;
-      }
-      if (countChip) countChip.textContent = 'Error loading';
-      showToast('Could not load inquiries. Ensure the backend server is running.', false);
+    } catch (apiErr) {
+      // Backend not running on this origin (e.g. GitHub Pages static deployment)
     }
+
+    // 2. Fallback to localStorage & static backup if backend not available
+    if (!isLiveBackend) {
+      try {
+        let localList = [];
+        try {
+          localList = JSON.parse(localStorage.getItem('saffron_contacts') || '[]');
+        } catch (e) {
+          localList = [];
+        }
+
+        let staticList = [];
+        try {
+          const staticRes = await fetch('../data/contacts.json');
+          if (staticRes.ok) {
+            staticList = await staticRes.json();
+          }
+        } catch (e) {
+          staticList = [];
+        }
+
+        // Merge, preferring local items for latest status
+        const mergedMap = new Map();
+        staticList.forEach(item => {
+          if (item && item.id) mergedMap.set(item.id, { ...item, status: item.status || 'pending' });
+        });
+        localList.forEach(item => {
+          if (item && item.id) {
+            const existing = mergedMap.get(item.id) || {};
+            mergedMap.set(item.id, { ...existing, ...item, status: item.status || existing.status || 'pending' });
+          }
+        });
+
+        inquiries = Array.from(mergedMap.values());
+        cachedInquiries = inquiries;
+
+        // Apply filter locally
+        if (filter && filter !== 'all') {
+          inquiries = inquiries.filter(c => (c.status || 'pending').toLowerCase() === filter.toLowerCase());
+        }
+      } catch (fallbackErr) {
+        console.error('Fallback error:', fallbackErr);
+      }
+    }
+
+    const total = inquiries.length;
+    if (countChip) {
+      const label = filter === 'all' ? 'Total' : filter.charAt(0).toUpperCase() + filter.slice(1);
+      countChip.textContent = `${total} ${label} Inquir${total !== 1 ? 'ies' : 'y'}`;
+    }
+
+    renderTable(inquiries);
   }
 
   // Render rows in table
@@ -175,6 +210,9 @@ document.addEventListener('DOMContentLoaded', () => {
         e.currentTarget.disabled = true;
         e.currentTarget.textContent = 'Updating...';
 
+        let updated = false;
+
+        // 1. Try Backend API
         try {
           const res = await fetch('/api/admin/contacts/status', {
             method: 'POST',
@@ -187,17 +225,40 @@ document.addEventListener('DOMContentLoaded', () => {
             })
           });
 
-          const data = await res.json();
-          if (res.ok && data.success) {
-            showToast(`Inquiry ${id} marked as replied!`);
-            // Refresh list to update counts and filtered views properly
-            await loadInquiries(currentFilter);
-          } else {
-            throw new Error(data.message || 'Status update failed');
+          if (res.ok) {
+            const data = await res.json();
+            if (data.success) {
+              updated = true;
+            }
           }
-        } catch (err) {
-          console.error('Error updating status:', err);
-          showToast(`Error: ${err.message}`, false);
+        } catch (apiErr) {
+          // Backend offline or on GitHub Pages static deployment
+        }
+
+        // 2. Always persist status to localStorage as well
+        try {
+          const localList = JSON.parse(localStorage.getItem('saffron_contacts') || '[]');
+          let found = false;
+          localList.forEach(item => {
+            if (item.id === id) {
+              item.status = 'replied';
+              found = true;
+            }
+          });
+          if (!found) {
+            localList.push({ id, status: 'replied' });
+          }
+          localStorage.setItem('saffron_contacts', JSON.stringify(localList));
+          updated = true;
+        } catch (storageErr) {
+          console.error('Storage update error:', storageErr);
+        }
+
+        if (updated) {
+          showToast(`Inquiry ${id} marked as replied!`);
+          await loadInquiries(currentFilter);
+        } else {
+          showToast(`Could not update inquiry status`, false);
           e.currentTarget.disabled = false;
           e.currentTarget.textContent = originalText;
         }
