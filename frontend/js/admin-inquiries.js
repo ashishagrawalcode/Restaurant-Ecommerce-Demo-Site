@@ -55,6 +55,36 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
+  // Update executive KPI analytics cards
+  function updateKpiCards(allList) {
+    const totalEl = document.getElementById('kpiTotal');
+    const pendingEl = document.getElementById('kpiPending');
+    const repliedEl = document.getElementById('kpiReplied');
+    const rateEl = document.getElementById('kpiRate');
+    const rateSubEl = document.getElementById('kpiRateSub');
+    const progressFill = document.getElementById('kpiProgressFill');
+
+    if (!totalEl || !pendingEl || !repliedEl || !rateEl) return;
+
+    const list = Array.isArray(allList) ? allList : [];
+    const total = list.length;
+    const pending = list.filter(i => (i.status || 'pending').toLowerCase() === 'pending').length;
+    const replied = list.filter(i => (i.status || 'pending').toLowerCase() === 'replied').length;
+    const rate = total > 0 ? Math.round((replied / total) * 100) : 0;
+
+    totalEl.textContent = total;
+    pendingEl.textContent = pending;
+    repliedEl.textContent = replied;
+    rateEl.textContent = `${rate}%`;
+
+    if (rateSubEl) {
+      rateSubEl.textContent = `${replied} of ${total} addressed`;
+    }
+    if (progressFill) {
+      progressFill.style.width = `${rate}%`;
+    }
+  }
+
   // Load inquiries: uses backend API with static/localStorage fallback for GitHub Pages
   async function loadInquiries(filter = currentFilter) {
     if (tableBody) {
@@ -129,6 +159,32 @@ document.addEventListener('DOMContentLoaded', () => {
         console.error('Fallback error:', fallbackErr);
       }
     }
+
+    // Always compute KPI analytics from master list
+    let masterList = [];
+    if (isLiveBackend) {
+      if (filter === 'all') {
+        masterList = inquiries;
+        cachedInquiries = inquiries;
+      } else if (cachedInquiries.length > 0) {
+        masterList = cachedInquiries;
+      } else {
+        try {
+          const allRes = await fetch('/api/admin/contacts/list');
+          if (allRes.ok) {
+            const allData = await allRes.json();
+            masterList = allData.inquiries || [];
+            cachedInquiries = masterList;
+          }
+        } catch (e) {
+          masterList = inquiries;
+        }
+      }
+    } else {
+      masterList = cachedInquiries;
+    }
+
+    updateKpiCards(masterList);
 
     const total = inquiries.length;
     if (countChip) {
@@ -256,6 +312,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (updated) {
           showToast(`Inquiry ${id} marked as replied!`);
+          cachedInquiries.forEach(item => {
+            if (item.id === id) item.status = 'replied';
+          });
+          updateKpiCards(cachedInquiries);
           await loadInquiries(currentFilter);
         } else {
           showToast(`Could not update inquiry status`, false);
