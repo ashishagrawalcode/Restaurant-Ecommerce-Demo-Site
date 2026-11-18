@@ -341,8 +341,34 @@ const server = http.createServer(async (req, res) => {
   });
 });
 
-// start server
-server.listen(PORT, () => {
-  console.log(`Server running at http://localhost:${PORT}`);
-  console.log(`Serving frontend from: ${FRONTEND_DIR}`);
+// start server with graceful fallback if default port is in use (e.g. macOS AirPlay Receiver)
+let currentPort = Number(PORT);
+
+function startServer(portToListen) {
+  server.listen(portToListen);
+}
+
+server.on('listening', () => {
+  const address = server.address();
+  const actualPort = typeof address === 'string' ? address : address.port;
+  console.log(`\n==================================================`);
+  console.log(`👑 The Saffron Plate Server Running`);
+  console.log(`🌐 Local Website URL: http://localhost:${actualPort}`);
+  console.log(`📁 Serving frontend from: ${FRONTEND_DIR}`);
+  console.log(`📑 Staff Portal: http://localhost:${actualPort}/pages/admin-inquiries.html`);
+  console.log(`==================================================\n`);
 });
+
+server.on('error', (err) => {
+  if (err.code === 'EADDRINUSE') {
+    const nextPort = currentPort === 5000 ? 5001 : currentPort + 1;
+    console.warn(`[WARN] Port ${currentPort} is currently occupied (macOS AirPlay Receiver occupies port 5000).`);
+    console.log(`[INFO] Automatically retrying on available port: http://localhost:${nextPort}...`);
+    currentPort = nextPort;
+    setTimeout(() => startServer(nextPort), 250);
+  } else {
+    console.error('Server error:', err);
+  }
+});
+
+startServer(currentPort);

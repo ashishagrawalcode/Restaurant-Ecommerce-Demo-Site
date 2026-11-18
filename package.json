@@ -1,0 +1,12 @@
+{
+  "name": "restaurant-ecommerce-demo-site",
+  "version": "1.0.0",
+  "description": "The Saffron Plate - Fullstack Pure Vegetarian Fine Dining Website",
+  "main": "backend/server.js",
+  "scripts": {
+    "start": "node backend/server.js",
+    "dev": "node backend/server.js"
+  },
+  "author": "The Saffron Plate Team",
+  "license": "ISC"
+}
