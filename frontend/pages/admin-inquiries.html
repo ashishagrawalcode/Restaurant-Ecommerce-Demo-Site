@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Inquiries Portal — The Saffron Plate</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Cormorant+Garamond:ital,wght@0,500;1,400;1,600&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/styles.css">
+  <style>
+    .admin-container {
+      max-width: 1280px;
+      margin: 110px auto 60px;
+      padding: 0 24px;
+      min-height: calc(100vh - 280px);
+    }
+
+    .admin-header {
+      margin-bottom: 30px;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 24px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: flex-end;
+      gap: 16px;
+    }
+
+    .admin-title-group h1 {
+      font-size: 2.2rem;
+      color: var(--heading);
+      letter-spacing: 0.04em;
+      margin: 6px 0;
+    }
+
+    .admin-title-group p {
+      color: var(--body-text);
+      font-size: 0.95rem;
+    }
+
+    .admin-toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      align-items: center;
+      margin-bottom: 24px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 14px 18px;
+    }
+
+    .filter-group {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .filter-btn {
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--body-text);
+      padding: 7px 16px;
+      border-radius: var(--radius-sm);
+      font-size: 0.85rem;
+      cursor: pointer;
+      font-family: var(--font-sans);
+      transition: var(--transition);
+    }
+
+    .filter-btn:hover {
+      border-color: var(--gold);
+      color: var(--gold);
+    }
+
+    .filter-btn.active {
+      background: var(--gold);
+      border-color: var(--gold);
+      color: #0e0a06;
+      font-weight: 600;
+    }
+
+    .toolbar-meta {
+      margin-left: auto;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .count-chip {
+      background: rgba(201, 162, 39, 0.12);
+      border: 1px solid rgba(201, 162, 39, 0.35);
+      color: var(--gold);
+      padding: 5px 12px;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      font-weight: 500;
+    }
+
+    .btn-refresh {
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--body-text);
+      padding: 7px 14px;
+      border-radius: var(--radius-sm);
+      font-size: 0.85rem;
+      cursor: pointer;
+      font-family: var(--font-sans);
+      transition: var(--transition);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .btn-refresh:hover {
+      border-color: var(--gold);
+      color: var(--gold);
+    }
+
+    /* Table styling */
+    .table-responsive {
+      overflow-x: auto;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+    }
+
+    .admin-table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      font-size: 0.92rem;
+    }
+
+    .admin-table thead th {
+      background: #191512;
+      color: var(--gold);
+      font-family: var(--font-serif);
+      font-size: 0.82rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 16px 18px;
+      border-bottom: 1px solid var(--border);
+      white-space: nowrap;
+    }
+
+    .admin-table tbody tr {
+      border-bottom: 1px solid rgba(58, 53, 48, 0.6);
+      transition: background 0.2s ease;
+    }
+
+    .admin-table tbody tr:hover {
+      background: rgba(201, 162, 39, 0.04);
+    }
+
+    .admin-table tbody tr:last-child {
+      border-bottom: none;
+    }
+
+    .admin-table td {
+      padding: 16px 18px;
+      vertical-align: middle;
+      color: var(--body-text);
+    }
+
+    .col-id {
+      font-family: monospace;
+      color: var(--gold);
+      font-size: 0.88rem;
+      white-space: nowrap;
+      font-weight: 600;
+    }
+
+    .col-name {
+      color: var(--heading);
+      font-weight: 500;
+      white-space: nowrap;
+    }
+
+    .col-email a {
+      color: var(--body-text);
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+
+    .col-email a:hover {
+      color: var(--gold);
+    }
+
+    .col-subject {
+      color: #dfd2c4;
+      font-weight: 500;
+      min-width: 140px;
+    }
+
+    .col-message {
+      max-width: 320px;
+      line-height: 1.5;
+      font-size: 0.88rem;
+      word-break: break-word;
+    }
+
+    .col-date {
+      font-size: 0.78rem;
+      color: #8c8276;
+      margin-top: 4px;
+    }
+
+    /* Badges */
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 10px;
+      border-radius: 12px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      white-space: nowrap;
+    }
+
+    .status-badge.pending {
+      background: rgba(230, 162, 60, 0.15);
+      color: #e6a23c;
+      border: 1px solid rgba(230, 162, 60, 0.35);
+    }
+
+    .status-badge.replied {
+      background: rgba(103, 194, 58, 0.15);
+      color: #67c23a;
+      border: 1px solid rgba(103, 194, 58, 0.35);
+    }
+
+    .status-badge.reviewed {
+      background: rgba(64, 158, 255, 0.15);
+      color: #409eff;
+      border: 1px solid rgba(64, 158, 255, 0.35);
+    }
+
+    .status-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: currentColor;
+    }
+
+    /* Action button */
+    .btn-action {
+      background: transparent;
+      border: 1px solid var(--gold);
+      color: var(--gold);
+      padding: 6px 14px;
+      border-radius: var(--radius-sm);
+      font-size: 0.82rem;
+      cursor: pointer;
+      font-family: var(--font-sans);
+      font-weight: 500;
+      transition: var(--transition);
+      white-space: nowrap;
+    }
+
+    .btn-action:hover:not(:disabled) {
+      background: var(--gold);
+      color: #0e0a06;
+      box-shadow: 0 4px 12px rgba(201, 162, 39, 0.25);
+    }
+
+    .btn-action:disabled {
+      opacity: 0.55;
+      cursor: not-allowed;
+      border-color: #555;
+      color: #777;
+    }
+
+    .btn-action.done {
+      background: rgba(103, 194, 58, 0.15);
+      border-color: rgba(103, 194, 58, 0.4);
+      color: #67c23a;
+    }
+
+    /* Toast alert notification */
+    #adminToast {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      padding: 12px 20px;
+      border-radius: var(--radius-md);
+      background: #1f1b17;
+      border: 1px solid var(--gold);
+      color: var(--heading);
+      font-size: 0.9rem;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+      z-index: 1000;
+      transform: translateY(100px);
+      opacity: 0;
+      transition: transform 0.3s ease, opacity 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    #adminToast.show {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    .empty-state {
+      text-align: center;
+      padding: 60px 20px;
+      color: var(--body-text);
+    }
+
+    .empty-state h3 {
+      color: var(--heading);
+      margin-bottom: 8px;
+    }
+  </style>
+</head>
+<body>
+  <!-- Navbar -->
+  <header class="site-header">
+    <nav class="navbar-overlay">
+      <div class="nav-inner">
+        <div class="nav-menu-list left">
+          <a href="../index.html">Home</a>
+          <a href="order.html">Menu &amp; Order</a>
+          <a href="reservation.html">Reservations</a>
+        </div>
+        <a href="../index.html" class="brand-center">
+          <span class="brand-name">THE SAFFRON PLATE</span>
+          <span class="brand-sub">FINE DINING &amp; GOURMET KITCHEN</span>
+        </a>
+        <div class="nav-menu-list right">
+          <a href="about.html">About Us</a>
+          <a href="team.html">Our Team</a>
+          <a href="contact.html">Contact</a>
+          <a href="admin-inquiries.html" class="active">Staff Portal</a>
+          <a href="auth.html" class="nav-auth-btn">Sign In</a>
+        </div>
+        <button class="mobile-nav-toggle" id="mobileNavToggle" aria-label="Toggle Menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+      <div class="mobile-nav-menu" id="mobileNavMenu">
+        <a href="../index.html">Home</a>
+        <a href="order.html">Menu &amp; Order</a>
+        <a href="reservation.html">Reservations</a>
+        <a href="about.html">Our Heritage</a>
+        <a href="team.html">Culinary Team</a>
+        <a href="contact.html">Contact Us</a>
+        <a href="admin-inquiries.html" class="active">Staff Portal</a>
+        <a href="auth.html">Sign In</a>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Main Admin Content -->
+  <main class="admin-container">
+    <div class="admin-header">
+      <div class="admin-title-group">
+        <span class="eyebrow">RESTAURANT STAFF PORTAL</span>
+        <h1>CUSTOMER INQUIRIES &amp; FEEDBACK</h1>
+        <p>Review incoming patron inquiries, table booking requests, and mark messages as replied.</p>
+      </div>
+    </div>
+
+    <!-- Admin Toolbar: Filter by status & Refresh -->
+    <div class="admin-toolbar">
+      <div class="filter-group">
+        <button type="button" class="filter-btn active" data-status="all">All Inquiries</button>
+        <button type="button" class="filter-btn" data-status="pending">Pending</button>
+        <button type="button" class="filter-btn" data-status="replied">Replied</button>
+      </div>
+
+      <div class="toolbar-meta">
+        <span id="inquiryCountChip" class="count-chip">Loading...</span>
+        <button type="button" id="refreshBtn" class="btn-refresh" title="Refresh list">
+          &#x21bb; Refresh
+        </button>
+      </div>
+    </div>
+
+    <!-- Table Listing Customer Inquiries -->
+    <div class="table-responsive">
+      <table class="admin-table" id="inquiriesTable">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Subject</th>
+            <th>Message</th>
+            <th>Status</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody id="inquiriesTableBody">
+          <tr>
+            <td colspan="7" style="text-align: center; padding: 40px; color: var(--body-text);">
+              Loading customer inquiries...
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </main>
+
+  <!-- Toast notification -->
+  <div id="adminToast"></div>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="footer-container">
+      <div class="footer-brand">
+        <span class="brand-name">THE SAFFRON PLATE</span>
+        <span class="brand-sub">FINE DINING &amp; GOURMET KITCHEN</span>
+        <p>100% Pure Vegetarian Royal Dining. Staff &amp; Administrative Management Portal.</p>
+      </div>
+      <div class="footer-links">
+        <a href="../index.html">Home</a>
+        <a href="order.html">Menu &amp; Order</a>
+        <a href="reservation.html">Reservations</a>
+        <a href="contact.html">Contact Us</a>
+        <a href="admin-inquiries.html">Staff Portal</a>
+      </div>
+      <div class="footer-copy">
+        <p>&copy; 2026 The Saffron Plate. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../js/nav.js"></script>
+  <script src="../js/admin-inquiries.js"></script>
+</body>
+</html>

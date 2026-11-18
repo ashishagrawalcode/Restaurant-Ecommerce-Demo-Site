@@ -37,6 +37,7 @@ assessment/
 │   │   ├── order.js          # Menu filtering, cart & checkout
 │   │   ├── reservation.js    # Table reservation validation
 │   │   ├── contact.js        # Contact form validation & submission
+│   │   ├── admin-inquiries.js # Admin inquiries management & reply status logic (Vivek)
 │   │   ├── gallery.js        # Gallery filtering & fullscreen lightbox
 │   │   ├── team.js           # Team member modal preview
 │   │   ├── auth.js           # Guest sign-in & session handling
@@ -47,6 +48,7 @@ assessment/
 │   │   ├── about.html        # Restaurant heritage & story
 │   │   ├── auth.html         # Patron sign-in & register
 │   │   ├── contact.html      # Contact form & location information
+│   │   ├── admin-inquiries.html # Admin customer inquiries view & status portal (Vivek)
 │   │   ├── gallery.html      # Ambiance & architectural gallery
 │   │   ├── order.html        # Interactive menu catalog & cart
 │   │   ├── reservation.html  # Table booking form
