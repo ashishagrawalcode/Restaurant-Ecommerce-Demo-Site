@@ -23,6 +23,8 @@
     "email": "ashish@example.com",
     "subject": "Royal Dining Inquiry",
     "message": "Looking forward to booking a banquet hall.",
-    "createdAt": "2026-11-14T19:00:00.000Z"
+    "status": "pending",
+    "createdAt": "2026-11-14T19:00:00.000Z",
+    "updatedAt": "2026-11-18T09:18:58.617Z"
   }
 ]
