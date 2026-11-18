@@ -1,7 +1,4 @@
-// admin-inquiries.js - Restaurant Staff Inquiries Management
-// Assigned to: Vivek Yadav
-// Task: Display inquiries in table, handle status filter, and mark as replied
-
+// admin inquiries management
 document.addEventListener('DOMContentLoaded', () => {
   const tableBody = document.getElementById('inquiriesTableBody');
   const countChip = document.getElementById('inquiryCountChip');
@@ -13,7 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
   let toastTimer = null;
   let cachedInquiries = [];
 
-  // Show toast notification
+  // toast notification popup
   function showToast(message, isSuccess = true) {
     if (!toast) return;
     clearTimeout(toastTimer);
@@ -26,7 +23,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }, 3500);
   }
 
-  // Escape HTML helper to prevent XSS
+  // escape html for safety
   function escapeHtml(str) {
     if (!str) return '';
     return String(str)
@@ -37,7 +34,7 @@ document.addEventListener('DOMContentLoaded', () => {
       .replace(/'/g, '&#039;');
   }
 
-  // Format date helper
+  // format date string for display
   function formatDate(isoStr) {
     if (!isoStr) return '';
     try {
@@ -55,7 +52,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  // Update executive KPI analytics cards
+  // update dashboard metric cards
   function updateKpiCards(allList) {
     const totalEl = document.getElementById('kpiTotal');
     const pendingEl = document.getElementById('kpiPending');
@@ -85,7 +82,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  // Load inquiries: uses backend API with static/localStorage fallback for GitHub Pages
+  // fetch inquiries from backend with local fallback
   async function loadInquiries(filter = currentFilter) {
     if (tableBody) {
       tableBody.innerHTML = `
@@ -100,7 +97,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let inquiries = [];
     let isLiveBackend = false;
 
-    // 1. Try Live Backend API
+    // fetch from live api first
     try {
       const url = filter && filter !== 'all'
         ? `/api/admin/contacts/list?status=${encodeURIComponent(filter)}`
@@ -113,10 +110,10 @@ document.addEventListener('DOMContentLoaded', () => {
         isLiveBackend = true;
       }
     } catch (apiErr) {
-      // Backend not running on this origin (e.g. GitHub Pages static deployment)
+      // offline or static host
     }
 
-    // 2. Fallback to localStorage & static backup if backend not available
+    // fallback to storage and static backup
     if (!isLiveBackend) {
       try {
         let localList = [];
@@ -136,7 +133,6 @@ document.addEventListener('DOMContentLoaded', () => {
           staticList = [];
         }
 
-        // Merge, preferring local items for latest status
         const mergedMap = new Map();
         staticList.forEach(item => {
           if (item && item.id) mergedMap.set(item.id, { ...item, status: item.status || 'pending' });
@@ -151,7 +147,6 @@ document.addEventListener('DOMContentLoaded', () => {
         inquiries = Array.from(mergedMap.values());
         cachedInquiries = inquiries;
 
-        // Apply filter locally
         if (filter && filter !== 'all') {
           inquiries = inquiries.filter(c => (c.status || 'pending').toLowerCase() === filter.toLowerCase());
         }
@@ -160,7 +155,7 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     }
 
-    // Always compute KPI analytics from master list
+    // calculate kpi metrics from master list
     let masterList = [];
     if (isLiveBackend) {
       if (filter === 'all') {
@@ -195,7 +190,7 @@ document.addEventListener('DOMContentLoaded', () => {
     renderTable(inquiries);
   }
 
-  // Render rows in table
+  // render inquiry table rows
   function renderTable(inquiries) {
     if (!tableBody) return;
 
@@ -254,7 +249,7 @@ document.addEventListener('DOMContentLoaded', () => {
     attachActionListeners();
   }
 
-  // Attach click listener for "Mark as Replied" buttons
+  // handle mark as replied clicks
   function attachActionListeners() {
     const buttons = tableBody.querySelectorAll('.btn-mark-replied');
     buttons.forEach(btn => {
@@ -268,7 +263,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         let updated = false;
 
-        // 1. Try Backend API
+        // update backend status
         try {
           const res = await fetch('/api/admin/contacts/status', {
             method: 'POST',
@@ -288,10 +283,10 @@ document.addEventListener('DOMContentLoaded', () => {
             }
           }
         } catch (apiErr) {
-          // Backend offline or on GitHub Pages static deployment
+          // offline fallback
         }
 
-        // 2. Always persist status to localStorage as well
+        // save to local storage
         try {
           const localList = JSON.parse(localStorage.getItem('saffron_contacts') || '[]');
           let found = false;
@@ -326,7 +321,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // Filter button clicks
+  // filter button clicks
   filterBtns.forEach(btn => {
     btn.addEventListener('click', () => {
       filterBtns.forEach(b => b.classList.remove('active'));
@@ -336,7 +331,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // Refresh button click
+  // refresh button click
   if (refreshBtn) {
     refreshBtn.addEventListener('click', () => {
       loadInquiries(currentFilter);
@@ -344,6 +339,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // Initial load on page load
+  // initial load
   loadInquiries('all');
 });

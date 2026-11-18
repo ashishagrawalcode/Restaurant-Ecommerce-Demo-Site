@@ -118,7 +118,7 @@
       color: var(--gold);
     }
 
-    /* Table styling */
+    /* table */
     .table-responsive {
       overflow-x: auto;
       background: var(--bg-card);
@@ -208,7 +208,7 @@
       margin-top: 4px;
     }
 
-    /* Badges */
+    /* badges */
     .status-badge {
       display: inline-flex;
       align-items: center;
@@ -247,7 +247,7 @@
       background: currentColor;
     }
 
-    /* Action button */
+    /* action button */
     .btn-action {
       background: transparent;
       border: 1px solid var(--gold);
@@ -281,7 +281,7 @@
       color: #67c23a;
     }
 
-    /* Toast alert notification */
+    /* toast alert */
     #adminToast {
       position: fixed;
       bottom: 24px;
@@ -307,7 +307,7 @@
       opacity: 1;
     }
 
-    /* Empty state */
+    /* empty state */
     .empty-state {
       text-align: center;
       padding: 60px 20px;
@@ -319,7 +319,7 @@
       margin-bottom: 8px;
     }
 
-    /* Luxury KPI Analytics Grid */
+    /* kpi cards */
     .kpi-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
@@ -416,7 +416,7 @@
   </style>
 </head>
 <body>
-  <!-- Navbar -->
+  <!-- header -->
   <header class="site-header">
     <nav class="navbar-overlay">
       <div class="nav-inner">
@@ -453,7 +453,7 @@
     </nav>
   </header>
 
-  <!-- Main Admin Content -->
+  <!-- main content -->
   <main class="admin-container">
     <div class="admin-header">
       <div class="admin-title-group">
@@ -463,7 +463,7 @@
       </div>
     </div>
 
-    <!-- Luxury Executive KPI Analytics Cards -->
+    <!-- kpi summary -->
     <section class="kpi-grid">
       <div class="kpi-card total">
         <div class="kpi-head">
@@ -505,7 +505,7 @@
       </div>
     </section>
 
-    <!-- Admin Toolbar: Filter by status & Refresh -->
+    <!-- filters & actions -->
     <div class="admin-toolbar">
       <div class="filter-group">
         <button type="button" class="filter-btn active" data-status="all">All Inquiries</button>
@@ -521,7 +521,7 @@
       </div>
     </div>
 
-    <!-- Table Listing Customer Inquiries -->
+    <!-- inquiries table -->
     <div class="table-responsive">
       <table class="admin-table" id="inquiriesTable">
         <thead>
@@ -546,10 +546,10 @@
     </div>
   </main>
 
-  <!-- Toast notification -->
+  <!-- toast popup -->
   <div id="adminToast"></div>
 
-  <!-- Footer -->
+  <!-- footer -->
   <footer class="site-footer">
     <div class="footer-container">
       <div class="footer-brand">
