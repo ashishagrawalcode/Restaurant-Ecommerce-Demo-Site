@@ -132,6 +132,9 @@
     <div class="section-head">
       <span class="eyebrow">CRITICAL ACCLAIM</span>
       <h2>PATRON EXPERIENCES</h2>
+      <div style="margin-top: 14px;">
+        <button id="leaveReviewBtn" type="button" class="btn outline">LEAVE A REVIEW</button>
+      </div>
     </div>
 
     <div class="accolades-grid">
@@ -154,6 +157,43 @@
       </div>
     </div>
   </section>
+
+  <!-- Leave a Review Modal -->
+  <div id="reviewModal" class="modal-overlay" style="display: none;" role="dialog" aria-modal="true" aria-labelledby="reviewModalTitle">
+    <div class="modal-content" style="max-width: 480px; text-align: left;">
+      <button type="button" class="modal-close-btn" id="closeReviewModalBtn" aria-label="Close modal">&times;</button>
+      <div style="text-align: center; margin-bottom: 18px;">
+        <span class="eyebrow">YOUR FEEDBACK</span>
+        <h3 id="reviewModalTitle" style="font-family: var(--font-serif); color: var(--heading); font-size: 20px;">SHARE YOUR EXPERIENCE</h3>
+      </div>
+      <form id="reviewForm" style="display: flex; flex-direction: column; gap: 14px;">
+        <div style="display: flex; flex-direction: column; gap: 5px;">
+          <label for="reviewName" style="font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold); font-weight: 600;">Your Name</label>
+          <input type="text" id="reviewName" name="name" required placeholder="e.g. Rohini Sharma" style="width: 100%; padding: 10px 12px; background: var(--bg-main); border: 1px solid var(--border); border-radius: var(--radius-sm); color: var(--heading); font-family: var(--font-sans); font-size: 13px; outline: none;" />
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 5px;">
+          <label for="reviewDish" style="font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold); font-weight: 600;">Dish Experienced</label>
+          <input type="text" id="reviewDish" name="dish" placeholder="e.g. Maharaja Indian Thali, Malai Chaap" style="width: 100%; padding: 10px 12px; background: var(--bg-main); border: 1px solid var(--border); border-radius: var(--radius-sm); color: var(--heading); font-family: var(--font-sans); font-size: 13px; outline: none;" />
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 5px;">
+          <label for="reviewRating" style="font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold); font-weight: 600;">Rating</label>
+          <select id="reviewRating" name="rating" style="width: 100%; padding: 10px 12px; background: var(--bg-main); border: 1px solid var(--border); border-radius: var(--radius-sm); color: var(--heading); font-family: var(--font-sans); font-size: 13px; outline: none;">
+            <option value="5">★★★★★ (5 - Exceptional)</option>
+            <option value="4">★★★★☆ (4 - Very Good)</option>
+            <option value="3">★★★☆☆ (3 - Average)</option>
+            <option value="2">★★☆☆☆ (2 - Below Expectations)</option>
+            <option value="1">★☆☆☆☆ (1 - Poor)</option>
+          </select>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 5px;">
+          <label for="reviewComment" style="font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold); font-weight: 600;">Your Review</label>
+          <textarea id="reviewComment" name="comment" required rows="3" placeholder="Tell us about your culinary experience..." style="width: 100%; padding: 10px 12px; background: var(--bg-main); border: 1px solid var(--border); border-radius: var(--radius-sm); color: var(--heading); font-family: var(--font-sans); font-size: 13px; outline: none; resize: vertical; min-height: 80px;"></textarea>
+        </div>
+        <div id="reviewFormStatus" class="form-msg" style="display: none;"></div>
+        <button type="submit" id="submitReviewBtn" class="btn solid" style="width: 100%; margin-top: 4px;">SUBMIT REVIEW</button>
+      </form>
+    </div>
+  </div>
 
   <!-- Booking CTA -->
   <section class="home-cta-section">
@@ -193,6 +233,7 @@
 
   <script src="js/nav.js"></script>
   <script src="js/index.js"></script>
+  <script src="js/reviews.js"></script>
 </body>
 
 </html>

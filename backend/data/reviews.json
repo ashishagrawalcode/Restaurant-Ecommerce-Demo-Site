@@ -1,18 +1,26 @@
 [
   {
-    "id": "rev-001",
-    "name": "Aditya Singhania",
+    "id": "rev-101",
+    "name": "Delhi Gourmet Review",
+    "dish": "Dal Bukhara & Malai Chaap",
+    "rating": 5,
+    "comment": "An extraordinary revelation in pure vegetarian fine dining. The Dal Bukhara and Malai Chaap rival the best royal kitchens in Asia.",
+    "date": "2026-11-08T14:20:00.000Z"
+  },
+  {
+    "id": "rev-102",
+    "name": "Aditya & Meera Singhania",
     "dish": "Maharaja Indian Thali",
     "rating": 5,
-    "comment": "Sublime dining experience. Royal flavors and unmatched hospitality.",
+    "comment": "The Maharaja Suite candlelight anniversary experience was sublime. Flawless hospitality, timeless ambiance, and unforgettable flavors.",
     "date": "2026-11-10T18:00:00.000Z"
   },
   {
-    "id": "rev-002",
-    "name": "Meera Rao",
-    "dish": "Malai Chaap",
+    "id": "rev-103",
+    "name": "Epicurean Heritage Journal",
+    "dish": "Saffron Handi Biryani",
     "rating": 5,
-    "comment": "Incredible texture and perfectly balanced spices.",
+    "comment": "The Saffron Plate proves that centuries-old Indian vegetarian recipes hold unrivaled culinary elegance. Absolutely magnificent.",
     "date": "2026-11-12T19:30:00.000Z"
   }
 ]

@@ -40,7 +40,8 @@ assessment/
 │   │   ├── admin-inquiries.js # Admin inquiries management & reply status logic (Vivek)
 │   │   ├── gallery.js        # Gallery filtering & fullscreen lightbox
 │   │   ├── team.js           # Team member modal preview
-│   │   └── auth.js           # Guest sign-in & session handling
+│   │   ├── auth.js           # Guest sign-in & session handling
+│   │   └── reviews.js        # Patron reviews & ratings dynamic loader (Khush)
 │   ├── data/                 # Client menu backup catalog
 │   │   └── menu.json
 │   ├── pages/                # Multi-page application views

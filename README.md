@@ -103,7 +103,8 @@ assessment/
 │   │   ├── contact.js        # Contact form validation & submission
 │   │   ├── gallery.js        # Gallery filtering & fullscreen lightbox
 │   │   ├── team.js           # Team member modal preview
-│   │   └── auth.js           # Guest sign-in & session handling
+│   │   ├── auth.js           # Guest sign-in & session handling
+│   │   └── reviews.js        # Patron reviews & ratings dynamic loader
 │   ├── data/                 # Client menu backup catalog
 │   │   └── menu.json
 │   ├── pages/                # Multi-page application views
