@@ -145,7 +145,7 @@ const server = http.createServer(async (req, res) => {
     const id = pathname.replace('/api/menu', '').replace(/^\//, '');
 
     // READ all
-    if (method === 'GET' && !id) {
+    if (method === 'GET' && (!id || id === 'list')) {
       return sendJson(res, 200, menu);
     }
     // READ single item
