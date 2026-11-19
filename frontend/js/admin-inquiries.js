@@ -4,9 +4,12 @@ document.addEventListener('DOMContentLoaded', () => {
   const countChip = document.getElementById('inquiryCountChip');
   const refreshBtn = document.getElementById('refreshBtn');
   const filterBtns = document.querySelectorAll('.filter-btn');
+  const searchInput = document.getElementById('adminSearchInput');
+  const searchClearBtn = document.getElementById('searchClearBtn');
   const toast = document.getElementById('adminToast');
 
   let currentFilter = 'all';
+  let searchQuery = '';
   let toastTimer = null;
   let cachedInquiries = [];
 
@@ -82,8 +85,40 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
+  // filter by status and search query, then render
+  function applyFiltersAndRender() {
+    let list = cachedInquiries;
+
+    // filter by status tab
+    if (currentFilter && currentFilter !== 'all') {
+      list = list.filter(item => (item.status || 'pending').toLowerCase() === currentFilter.toLowerCase());
+    }
+
+    // filter by live search input
+    if (searchQuery) {
+      const q = searchQuery.toLowerCase();
+      list = list.filter(item => {
+        const id = (item.id || '').toLowerCase();
+        const name = (item.name || '').toLowerCase();
+        const email = (item.email || '').toLowerCase();
+        const subject = (item.subject || '').toLowerCase();
+        const msg = (item.message || '').toLowerCase();
+        return id.includes(q) || name.includes(q) || email.includes(q) || subject.includes(q) || msg.includes(q);
+      });
+    }
+
+    // update count chip text
+    if (countChip) {
+      const label = currentFilter === 'all' ? 'Total' : currentFilter.charAt(0).toUpperCase() + currentFilter.slice(1);
+      const searchNote = searchQuery ? ` matching "${searchQuery}"` : '';
+      countChip.textContent = `${list.length} ${label}${searchNote}`;
+    }
+
+    renderTable(list);
+  }
+
   // fetch inquiries from backend with local fallback
-  async function loadInquiries(filter = currentFilter) {
+  async function loadInquiries() {
     if (tableBody) {
       tableBody.innerHTML = `
         <tr>
@@ -94,19 +129,14 @@ document.addEventListener('DOMContentLoaded', () => {
       `;
     }
 
-    let inquiries = [];
     let isLiveBackend = false;
 
-    // fetch from live api first
+    // fetch all inquiries from live api
     try {
-      const url = filter && filter !== 'all'
-        ? `/api/admin/contacts/list?status=${encodeURIComponent(filter)}`
-        : '/api/admin/contacts/list';
-
-      const response = await fetch(url);
+      const response = await fetch('/api/admin/contacts/list');
       if (response.ok) {
         const data = await response.json();
-        inquiries = data.inquiries || [];
+        cachedInquiries = data.inquiries || [];
         isLiveBackend = true;
       }
     } catch (apiErr) {
@@ -144,50 +174,14 @@ document.addEventListener('DOMContentLoaded', () => {
           }
         });
 
-        inquiries = Array.from(mergedMap.values());
-        cachedInquiries = inquiries;
-
-        if (filter && filter !== 'all') {
-          inquiries = inquiries.filter(c => (c.status || 'pending').toLowerCase() === filter.toLowerCase());
-        }
+        cachedInquiries = Array.from(mergedMap.values());
       } catch (fallbackErr) {
         console.error('Fallback error:', fallbackErr);
       }
     }
 
-    // calculate kpi metrics from master list
-    let masterList = [];
-    if (isLiveBackend) {
-      if (filter === 'all') {
-        masterList = inquiries;
-        cachedInquiries = inquiries;
-      } else if (cachedInquiries.length > 0) {
-        masterList = cachedInquiries;
-      } else {
-        try {
-          const allRes = await fetch('/api/admin/contacts/list');
-          if (allRes.ok) {
-            const allData = await allRes.json();
-            masterList = allData.inquiries || [];
-            cachedInquiries = masterList;
-          }
-        } catch (e) {
-          masterList = inquiries;
-        }
-      }
-    } else {
-      masterList = cachedInquiries;
-    }
-
-    updateKpiCards(masterList);
-
-    const total = inquiries.length;
-    if (countChip) {
-      const label = filter === 'all' ? 'Total' : filter.charAt(0).toUpperCase() + filter.slice(1);
-      countChip.textContent = `${total} ${label} Inquir${total !== 1 ? 'ies' : 'y'}`;
-    }
-
-    renderTable(inquiries);
+    updateKpiCards(cachedInquiries);
+    applyFiltersAndRender();
   }
 
   // render inquiry table rows
@@ -195,11 +189,15 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!tableBody) return;
 
     if (!inquiries || inquiries.length === 0) {
+      const filterMsg = searchQuery
+        ? `No inquiries matching "${escapeHtml(searchQuery)}".`
+        : `There are no customer inquiries matching "${escapeHtml(currentFilter)}".`;
+
       tableBody.innerHTML = `
         <tr>
           <td colspan="7" class="empty-state">
             <h3>No Inquiries Found</h3>
-            <p>There are no customer inquiries matching "${escapeHtml(currentFilter)}".</p>
+            <p>${filterMsg}</p>
           </td>
         </tr>
       `;
@@ -311,7 +309,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (item.id === id) item.status = 'replied';
           });
           updateKpiCards(cachedInquiries);
-          await loadInquiries(currentFilter);
+          applyFiltersAndRender();
         } else {
           showToast(`Could not update inquiry status`, false);
           e.currentTarget.disabled = false;
@@ -321,24 +319,46 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  // live search input event
+  if (searchInput) {
+    searchInput.addEventListener('input', (e) => {
+      searchQuery = e.target.value.trim();
+      if (searchClearBtn) {
+        searchClearBtn.hidden = !searchQuery;
+      }
+      applyFiltersAndRender();
+    });
+  }
+
+  // clear search button
+  if (searchClearBtn) {
+    searchClearBtn.addEventListener('click', () => {
+      if (searchInput) searchInput.value = '';
+      searchQuery = '';
+      searchClearBtn.hidden = true;
+      applyFiltersAndRender();
+      if (searchInput) searchInput.focus();
+    });
+  }
+
   // filter button clicks
   filterBtns.forEach(btn => {
     btn.addEventListener('click', () => {
       filterBtns.forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
       currentFilter = btn.getAttribute('data-status') || 'all';
-      loadInquiries(currentFilter);
+      applyFiltersAndRender();
     });
   });
 
   // refresh button click
   if (refreshBtn) {
     refreshBtn.addEventListener('click', () => {
-      loadInquiries(currentFilter);
+      loadInquiries();
       showToast('Inquiries refreshed');
     });
   }
 
   // initial load
-  loadInquiries('all');
+  loadInquiries();
 });
