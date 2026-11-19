@@ -9,6 +9,16 @@ assessment/
 ├── backend/                  # Node.js REST API & static server
 │   ├── package.json          # Node project scripts & metadata
 │   ├── server.js             # Core HTTP server & primary API routes (Ashish)
+│   ├── config/               # Database and environment configuration
+│   │   ├── db.js             # MongoDB connection & Mongoose model compiler
+│   │   └── env.js            # Lightweight .env parser & loader
+│   ├── models/               # Mongoose schemas for data models
+│   │   ├── Contact.js        # Contact inquiry schema (Vivek)
+│   │   ├── Menu.js           # Menu items schema
+│   │   ├── Order.js          # Customer orders schema
+│   │   ├── Reservation.js    # Dining reservations schema
+│   │   ├── Review.js         # Customer ratings & reviews schema (Khush)
+│   │   └── User.js           # Patron & staff account schema (Shreya)
 │   ├── data/                 # JSON persistence store
 │   │   ├── menu.json         # Master menu catalog
 │   │   ├── orders.json       # Live customer orders
