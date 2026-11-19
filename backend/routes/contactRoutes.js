@@ -1,19 +1,15 @@
-// contactRoutes.js - Contact & Inquiries Admin Management
-// Assigned to: Vivek Yadav
-// Task: Handle contact inquiry filtering, status updates, and admin viewing
-
+// contact inquiries admin routes
 module.exports = {
   async handle(req, res, pathname, method, body, helpers) {
     const { readJson, writeJson, sendJson, isConnected, getModels } = helpers;
     const models = getModels ? getModels() : {};
     const useMongo = isConnected && isConnected() && models.Contact;
 
-    // GET /api/admin/contacts/list - view all inquiries with optional status filter
+    // get inquiries list with optional status filter
     if (pathname === '/api/admin/contacts/list' && method === 'GET') {
       try {
         let contacts = readJson('contacts.json');
 
-        // Parse optional status filter from query parameters (?status=pending / ?status=all)
         const parsedUrl = new URL(req.url, `http://${req.headers.host || 'localhost'}`);
         const statusFilter = parsedUrl.searchParams.get('status');
 
@@ -32,7 +28,7 @@ module.exports = {
       }
     }
 
-    // POST /api/admin/contacts/status - update inquiry status (e.g., replied, reviewed)
+    // update inquiry status
     if (pathname === '/api/admin/contacts/status' && method === 'POST') {
       const { id, status } = body;
 
@@ -46,12 +42,11 @@ module.exports = {
         return sendJson(res, 404, { success: false, message: 'Inquiry not found' });
       }
 
-      // Update status to "replied" or "reviewed" or specified status
       item.status = status || 'replied';
       item.updatedAt = new Date().toISOString();
       writeJson('contacts.json', contacts);
 
-      // Optionally sync to MongoDB if connected
+      // sync to mongodb if connected
       if (useMongo) {
         try {
           await models.Contact.findOneAndUpdate({ id }, { status: item.status });

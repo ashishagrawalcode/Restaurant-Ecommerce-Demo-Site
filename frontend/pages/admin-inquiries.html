@@ -118,7 +118,7 @@
       color: var(--gold);
     }
 
-    /* Table styling */
+    /* table */
     .table-responsive {
       overflow-x: auto;
       background: var(--bg-card);
@@ -208,7 +208,7 @@
       margin-top: 4px;
     }
 
-    /* Badges */
+    /* badges */
     .status-badge {
       display: inline-flex;
       align-items: center;
@@ -247,7 +247,7 @@
       background: currentColor;
     }
 
-    /* Action button */
+    /* action button */
     .btn-action {
       background: transparent;
       border: 1px solid var(--gold);
@@ -281,7 +281,7 @@
       color: #67c23a;
     }
 
-    /* Toast alert notification */
+    /* toast alert */
     #adminToast {
       position: fixed;
       bottom: 24px;
@@ -307,6 +307,7 @@
       opacity: 1;
     }
 
+    /* empty state */
     .empty-state {
       text-align: center;
       padding: 60px 20px;
@@ -317,10 +318,105 @@
       color: var(--heading);
       margin-bottom: 8px;
     }
+
+    /* kpi cards */
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+
+    .kpi-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 20px 22px;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+    }
+
+    .kpi-card:hover {
+      transform: translateY(-2px);
+      border-color: rgba(201, 162, 39, 0.45);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+    }
+
+    .kpi-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: var(--border);
+    }
+
+    .kpi-card.total::before { background: linear-gradient(90deg, #c9a227, #e5c058); }
+    .kpi-card.pending::before { background: linear-gradient(90deg, #e6a23c, #f39c12); }
+    .kpi-card.replied::before { background: linear-gradient(90deg, #67c23a, #2ecc71); }
+    .kpi-card.rate::before { background: linear-gradient(90deg, #409eff, #8e44ad); }
+
+    .kpi-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+
+    .kpi-label {
+      font-size: 0.78rem;
+      font-family: var(--font-sans);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #9c9183;
+      font-weight: 600;
+    }
+
+    .kpi-icon {
+      font-size: 1.15rem;
+      opacity: 0.85;
+    }
+
+    .kpi-value {
+      font-family: var(--font-serif);
+      font-size: 2.2rem;
+      font-weight: 700;
+      line-height: 1;
+      color: var(--heading);
+      margin-bottom: 6px;
+    }
+
+    .kpi-card.pending .kpi-value { color: #f5b041; }
+    .kpi-card.replied .kpi-value { color: #67c23a; }
+    .kpi-card.rate .kpi-value { color: #5dade2; }
+
+    .kpi-sub {
+      font-size: 0.8rem;
+      color: #7d7265;
+    }
+
+    .kpi-progress-bar {
+      margin-top: 10px;
+      height: 5px;
+      background: rgba(255, 255, 255, 0.08);
+      border-radius: 3px;
+      overflow: hidden;
+    }
+
+    .kpi-progress-fill {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, #67c23a, #5dade2);
+      border-radius: 3px;
+      transition: width 0.45s ease;
+    }
   </style>
 </head>
 <body>
-  <!-- Navbar -->
+  <!-- header -->
   <header class="site-header">
     <nav class="navbar-overlay">
       <div class="nav-inner">
@@ -357,7 +453,7 @@
     </nav>
   </header>
 
-  <!-- Main Admin Content -->
+  <!-- main content -->
   <main class="admin-container">
     <div class="admin-header">
       <div class="admin-title-group">
@@ -367,7 +463,49 @@
       </div>
     </div>
 
-    <!-- Admin Toolbar: Filter by status & Refresh -->
+    <!-- kpi summary -->
+    <section class="kpi-grid">
+      <div class="kpi-card total">
+        <div class="kpi-head">
+          <span class="kpi-label">Total Inquiries</span>
+          <span class="kpi-icon">&#x1F4CB;</span>
+        </div>
+        <div class="kpi-value" id="kpiTotal">0</div>
+        <div class="kpi-sub">All-time patron messages</div>
+      </div>
+
+      <div class="kpi-card pending">
+        <div class="kpi-head">
+          <span class="kpi-label">Pending Action</span>
+          <span class="kpi-icon">&#x23F3;</span>
+        </div>
+        <div class="kpi-value" id="kpiPending">0</div>
+        <div class="kpi-sub">Awaiting staff response</div>
+      </div>
+
+      <div class="kpi-card replied">
+        <div class="kpi-head">
+          <span class="kpi-label">Resolved / Replied</span>
+          <span class="kpi-icon">&#x2705;</span>
+        </div>
+        <div class="kpi-value" id="kpiReplied">0</div>
+        <div class="kpi-sub">Handled &amp; answered</div>
+      </div>
+
+      <div class="kpi-card rate">
+        <div class="kpi-head">
+          <span class="kpi-label">Response Rate</span>
+          <span class="kpi-icon">&#x1F4C8;</span>
+        </div>
+        <div class="kpi-value" id="kpiRate">0%</div>
+        <div class="kpi-sub" id="kpiRateSub">0 of 0 addressed</div>
+        <div class="kpi-progress-bar">
+          <div class="kpi-progress-fill" id="kpiProgressFill"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- filters & actions -->
     <div class="admin-toolbar">
       <div class="filter-group">
         <button type="button" class="filter-btn active" data-status="all">All Inquiries</button>
@@ -383,7 +521,7 @@
       </div>
     </div>
 
-    <!-- Table Listing Customer Inquiries -->
+    <!-- inquiries table -->
     <div class="table-responsive">
       <table class="admin-table" id="inquiriesTable">
         <thead>
@@ -408,10 +546,10 @@
     </div>
   </main>
 
-  <!-- Toast notification -->
+  <!-- toast popup -->
   <div id="adminToast"></div>
 
-  <!-- Footer -->
+  <!-- footer -->
   <footer class="site-footer">
     <div class="footer-container">
       <div class="footer-brand">

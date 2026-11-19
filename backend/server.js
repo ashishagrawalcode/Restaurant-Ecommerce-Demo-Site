@@ -341,8 +341,29 @@ const server = http.createServer(async (req, res) => {
   });
 });
 
-// start server
-server.listen(PORT, () => {
-  console.log(`Server running at http://localhost:${PORT}`);
-  console.log(`Serving frontend from: ${FRONTEND_DIR}`);
+// start server with fallback if port is busy
+let currentPort = Number(PORT);
+
+function startServer(portToListen) {
+  server.listen(portToListen);
+}
+
+server.on('listening', () => {
+  const address = server.address();
+  const actualPort = typeof address === 'string' ? address : address.port;
+  console.log(`Server running at http://localhost:${actualPort}`);
+  console.log(`Staff portal at http://localhost:${actualPort}/pages/admin-inquiries.html`);
 });
+
+server.on('error', (err) => {
+  if (err.code === 'EADDRINUSE') {
+    const nextPort = currentPort === 5000 ? 5001 : currentPort + 1;
+    console.log(`Port ${currentPort} busy, trying port ${nextPort}...`);
+    currentPort = nextPort;
+    setTimeout(() => startServer(nextPort), 250);
+  } else {
+    console.error('Server error:', err);
+  }
+});
+
+startServer(currentPort);
