@@ -132,6 +132,24 @@ assessment/
 
 ---
 
+## 🔌 REST API Endpoints
+
+The backend server exposes clean REST endpoints supporting dual-mode persistence (MongoDB with automatic JSON fallback):
+
+| Method | Endpoint | Description | Contributor |
+| :--- | :--- | :--- | :--- |
+| `GET` | `/api/menu/list` | Fetch master restaurant menu | Ashish Agrawal |
+| `POST` | `/api/orders/create` | Place new customer order | Ashish Agrawal |
+| `POST` | `/api/reservations/book` | Submit table reservation | Ashish Agrawal |
+| `GET` | `/api/reviews/list` | Retrieve customer reviews & ratings | Khush Raghav |
+| `POST` | `/api/reviews/new` | Submit new customer review | Khush Raghav |
+| `POST` | `/api/auth/register` | Register new patron account | Shreya Chaudhary |
+| `POST` | `/api/auth/login` | Authenticate patron session | Shreya Chaudhary |
+| `GET` | `/api/admin/contacts/list` | View submitted contact inquiries | Vivek Yadav |
+| `POST` | `/api/admin/contacts/status` | Update inquiry resolution status | Vivek Yadav |
+
+---
+
 ## 💻 Getting Started
 
 To run both frontend and backend locally with one command:
