@@ -1,5 +1,19 @@
-// contact inquiries admin routes
+/**
+ * @file contactRoutes.js
+ * @description Contact inquiries administration route handlers.
+ * Handles inquiry retrieval with status filtering and lifecycle updates (pending, replied, archived).
+ */
 module.exports = {
+  /**
+   * Request dispatcher for administrative contact inquiry routes.
+   * @param {import('http').IncomingMessage} req - Incoming request.
+   * @param {import('http').ServerResponse} res - Server response.
+   * @param {string} pathname - Parsed endpoint path.
+   * @param {string} method - HTTP request method.
+   * @param {Object} body - Parsed JSON body.
+   * @param {Object} helpers - Shared server persistence and formatting utilities.
+   * @returns {Promise<void>}
+   */
   async handle(req, res, pathname, method, body, helpers) {
     const { readJson, writeJson, sendJson, isConnected, getModels } = helpers;
     const models = getModels ? getModels() : {};
