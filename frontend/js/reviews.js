@@ -1,18 +1,33 @@
-// reviews.js - Customer Reviews, Ratings & Testimonials Module
-// Assigned to: Khush Raghav
-// Goal: Allow diners to submit feedback and dynamically display customer reviews on the website.
+/**
+ * @file reviews.js
+ * @description Customer Reviews, Ratings & Testimonials Client Controller.
+ * Handles fetching customer reviews, dynamic DOM card rendering, star formatting,
+ * and review submission modal interactions.
+ */
 
 document.addEventListener('DOMContentLoaded', () => {
   const accoladesGrid = document.querySelector('.accolades-grid');
   if (!accoladesGrid) return;
 
-  // Helper: Format rating stars (e.g., 5 -> "★★★★★", 4 -> "★★★★☆")
+  /**
+   * Converts numerical rating into a star character representation.
+   * @param {number|string} rating - Score between 1 and 5.
+   * @returns {string} String of filled and empty stars (e.g. "★★★★★").
+   */
   function formatStars(rating) {
     const r = Math.max(1, Math.min(5, Math.round(Number(rating) || 5)));
     return '★'.repeat(r) + '☆'.repeat(5 - r);
   }
 
-  // Render a single review card DOM element
+  /**
+   * Constructs an accolade card DOM element for a review item.
+   * @param {Object} review - Review record object.
+   * @param {string} review.name - Author name.
+   * @param {string} [review.dish] - Referenced dish.
+   * @param {number} review.rating - Star score.
+   * @param {string} review.comment - Review quotation text.
+   * @returns {HTMLDivElement} Rendered card element.
+   */
   function createReviewCard(review) {
     const card = document.createElement('div');
     card.className = 'accolade-card';
@@ -36,7 +51,12 @@ document.addEventListener('DOMContentLoaded', () => {
     return card;
   }
 
-  // Render all reviews into .accolades-grid
+  /**
+   * Renders the collection of review cards into the accolades grid container.
+   * Displays a friendly placeholder message if review list is empty.
+   * @param {Array<Object>} reviews - Array of review objects.
+   * @returns {void}
+   */
   function renderReviews(reviews) {
     accoladesGrid.replaceChildren();
     if (!Array.isArray(reviews) || reviews.length === 0) {
@@ -52,7 +72,11 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // Fetch reviews from backend API
+  /**
+   * Fetches review list from the REST API endpoint and triggers rendering.
+   * Supplies hardcoded royal testimonial fallbacks if the server is offline.
+   * @returns {Promise<void>}
+   */
   async function loadReviews() {
     try {
       const response = await fetch('/api/reviews/list');
