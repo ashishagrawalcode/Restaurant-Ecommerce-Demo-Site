@@ -1,7 +1,16 @@
-// env.js - simple .env file loader for environment variables
+/**
+ * @file env.js
+ * @description Lightweight .env environment variable parser and loader.
+ * Parses key-value pairs without external dependency requirements.
+ */
 const fs = require('fs');
 const path = require('path');
 
+/**
+ * Reads and parses .env file from the backend directory and loads values into process.env.
+ * Skips comments (#) and avoids overwriting existing environment variables.
+ * @returns {void}
+ */
 function loadEnv() {
   const envPath = path.join(__dirname, '../.env');
   if (!fs.existsSync(envPath)) return;

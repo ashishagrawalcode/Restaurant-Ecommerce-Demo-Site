@@ -1,9 +1,19 @@
-// db.js - MongoDB database connection setup
+/**
+ * @file db.js
+ * @description MongoDB database connection setup and Mongoose model compilation.
+ * Supports dual-mode persistence: MongoDB when MONGO_URI is valid, with graceful
+ * fallback to local JSON file storage.
+ */
 const mongoose = require('mongoose');
 
 let isMongoConnected = false;
 let models = {};
 
+/**
+ * Establishes connection to MongoDB and compiles all required schemas.
+ * Falls back gracefully to JSON storage mode if connection fails or URI is unset.
+ * @returns {Promise<boolean>} True if MongoDB connected successfully, false otherwise.
+ */
 async function connectDB() {
   const mongoURI = process.env.MONGO_URI;
 
@@ -52,14 +62,26 @@ async function connectDB() {
   }
 }
 
+/**
+ * Retrieves the current database backend operational status.
+ * @returns {'mongodb'|'json_file'} Storage mode currently active.
+ */
 function getDbStatus() {
   return isMongoConnected ? 'mongodb' : 'json_file';
 }
 
+/**
+ * Retrieves compiled Mongoose models dictionary.
+ * @returns {Object.<string, mongoose.Model>} Compiled models map.
+ */
 function getModels() {
   return models;
 }
 
+/**
+ * Checks whether an active MongoDB connection is established.
+ * @returns {boolean} True if MongoDB is connected, false otherwise.
+ */
 function isConnected() {
   return isMongoConnected;
 }
