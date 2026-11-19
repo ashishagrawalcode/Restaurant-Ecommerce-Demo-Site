@@ -1,8 +1,22 @@
-// reviewRoutes.js - Customer Reviews, Ratings & Testimonials Module
-// Assigned to: Khush Raghav
-// Goal: Allow diners to submit feedback and dynamically display customer reviews on the website.
+/**
+ * @file reviewRoutes.js
+ * @description Customer Reviews, Ratings & Testimonials Module.
+ * Provides REST API route handlers for diners to submit culinary feedback
+ * and fetch customer reviews for dynamic front-end rendering.
+ * Supports dual JSON storage and MongoDB synchronization.
+ */
 
 module.exports = {
+  /**
+   * Main HTTP request dispatcher for /api/reviews endpoints.
+   * @param {import('http').IncomingMessage} req - HTTP incoming request object.
+   * @param {import('http').ServerResponse} res - HTTP server response object.
+   * @param {string} pathname - Parsed URL pathname (e.g. /api/reviews/list).
+   * @param {string} method - HTTP method (GET, POST).
+   * @param {Object} body - Parsed JSON request payload.
+   * @param {Object} helpers - Shared server utilities (readJson, writeJson, sendJson, isConnected, getModels).
+   * @returns {void}
+   */
   handle(req, res, pathname, method, body, helpers) {
     const { readJson, writeJson, sendJson, isConnected, getModels } = helpers;
 

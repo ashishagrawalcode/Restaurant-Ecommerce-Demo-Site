@@ -1,7 +1,21 @@
-// authRoutes.js - Authentication & Patron Account Management
-// Built by Shreya Chaudhary (Task: Patron Authentication CRUD)
+/**
+ * @file authRoutes.js
+ * @description Authentication & Patron Account Management routes.
+ * Provides endpoints for patron registration, credential verification, profile inspection,
+ * account credentials update, and patron account deletion.
+ */
 
 module.exports = {
+  /**
+   * Request dispatcher for authentication and patron management routes.
+   * @param {import('http').IncomingMessage} req - Incoming request.
+   * @param {import('http').ServerResponse} res - Server response.
+   * @param {string} pathname - Parsed endpoint path.
+   * @param {string} method - HTTP request method.
+   * @param {Object} body - Parsed JSON body.
+   * @param {Object} helpers - Shared server persistence and formatting utilities.
+   * @returns {Promise<void>}
+   */
   async handle(req, res, pathname, method, body, helpers) {
     const { readJson, writeJson, sendJson, isConnected, getModels } = helpers;
     const models = getModels ? getModels() : {};

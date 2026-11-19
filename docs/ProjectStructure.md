@@ -9,6 +9,16 @@ assessment/
 ├── backend/                  # Node.js REST API & static server
 │   ├── package.json          # Node project scripts & metadata
 │   ├── server.js             # Core HTTP server & primary API routes (Ashish)
+│   ├── config/               # Database and environment configuration
+│   │   ├── db.js             # MongoDB connection & Mongoose model compiler
+│   │   └── env.js            # Lightweight .env parser & loader
+│   ├── models/               # Mongoose schemas for data models
+│   │   ├── Contact.js        # Contact inquiry schema (Vivek)
+│   │   ├── Menu.js           # Menu items schema
+│   │   ├── Order.js          # Customer orders schema
+│   │   ├── Reservation.js    # Dining reservations schema
+│   │   ├── Review.js         # Customer ratings & reviews schema (Khush)
+│   │   └── User.js           # Patron & staff account schema (Shreya)
 │   ├── data/                 # JSON persistence store
 │   │   ├── menu.json         # Master menu catalog
 │   │   ├── orders.json       # Live customer orders
@@ -54,9 +64,21 @@ assessment/
 │   │   ├── reservation.html  # Table booking form
 │   │   └── team.html         # Project team contributors
 │   └── images/               # High-resolution dish and team photography
-└── docs/                     # Project documentation & guidelines
+└── docs/                     # Project documentation & engineering manuals
+    ├── API_REFERENCE.md      # Full REST API endpoint reference and curl examples
+    ├── ARCHITECTURE_DEEP_DIVE.md # Systems engineering and runtime mechanics whitepaper
+    ├── CHANGELOG.md          # Version release notes and contributor changelog
+    ├── CONTRIBUTING_GUIDELINES.md # Contributor code of conduct and pull request checklist
+    ├── DATABASE_SCHEMA.md    # Complete Mongoose and JSON data dictionaries
+    ├── DEVELOPER_GUIDE.md    # Developer onboarding, directory navigation, and runbook
+    ├── DISASTER_RECOVERY_AND_BACKUP.md # JSON backup scripts and data integrity runbook
+    ├── ENVIRONMENT_CONFIG_GUIDE.md # Environment variables, Atlas IP, and PM2 cluster guide
+    ├── FRONTEND_DESIGN_SYSTEM.md # Color tokens, typography, grid, and accessibility standards
+    ├── GLOSSARY_AND_FAQ.md   # Domain terminology glossary and developer FAQ
     ├── ImplementationPlan.md # 4-person task distribution & plan
-    └── ProjectStructure.md   # This architecture guide
+    ├── PERFORMANCE_AND_SEO_GUIDE.md # Core Web Vitals, JSON-LD schema, and caching guide
+    ├── ProjectStructure.md   # This architecture and directory layout guide
+    └── TESTING_AND_DEPLOYMENT.md # Manual test suites, health check script, and Docker guide
 ```
 
 ### Running the Application
