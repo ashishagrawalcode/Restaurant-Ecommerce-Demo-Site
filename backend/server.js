@@ -1,5 +1,8 @@
-// server.js - main backend server for The Saffron Plate
-// Built by Ashish Agrawal
+/**
+ * @file server.js
+ * @description Main HTTP backend server for The Saffron Plate restaurant web application.
+ * Provides static asset serving, CORS handling, REST API endpoints, and routes dispatching.
+ */
 
 const http = require('http');
 const fs = require('fs');
@@ -22,7 +25,11 @@ const PORT = process.env.PORT || 5000;
 const FRONTEND_DIR = path.join(__dirname, '../frontend');
 const DATA_DIR = path.join(__dirname, 'data');
 
-// helper: read json file
+/**
+ * Reads and parses JSON data file from the backend data directory.
+ * @param {string} filename - Target filename inside data/ directory.
+ * @returns {Array|Object} Parsed JSON contents or empty array on read failure.
+ */
 function readJson(filename) {
   try {
     const filePath = path.join(DATA_DIR, filename);
@@ -34,7 +41,12 @@ function readJson(filename) {
   }
 }
 
-// helper: write json file
+/**
+ * Serializes and writes JSON data safely to disk.
+ * @param {string} filename - Target filename inside data/ directory.
+ * @param {any} data - Data structure to serialize and write.
+ * @returns {boolean} True on write success, false on error.
+ */
 function writeJson(filename, data) {
   try {
     const filePath = path.join(DATA_DIR, filename);
@@ -46,7 +58,13 @@ function writeJson(filename, data) {
   }
 }
 
-// helper: send json response
+/**
+ * Sends a structured JSON HTTP response with CORS headers.
+ * @param {import('http').ServerResponse} res - HTTP response stream.
+ * @param {number} statusCode - HTTP status code.
+ * @param {any} payload - Response body to serialize as JSON.
+ * @returns {void}
+ */
 function sendJson(res, statusCode, payload) {
   res.writeHead(statusCode, {
     'Content-Type': 'application/json',
@@ -57,7 +75,11 @@ function sendJson(res, statusCode, payload) {
   res.end(JSON.stringify(payload));
 }
 
-// helper: read post and put body
+/**
+ * Buffers and parses incoming HTTP POST/PUT request JSON body.
+ * @param {import('http').IncomingMessage} req - Incoming HTTP request stream.
+ * @returns {Promise<Object>} Resolves with parsed JSON body or empty object.
+ */
 function getRequestBody(req) {
   return new Promise((resolve) => {
     let body = '';
