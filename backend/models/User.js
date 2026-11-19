@@ -1,6 +1,19 @@
-// User.js - Patron account schema for MongoDB
-// Handles: id, name, email, password, role, timestamps
+/**
+ * @file User.js
+ * @description Mongoose schema definition for Patron & Staff User Accounts.
+ * Manages identity, email credentials, role-based authorization, and timestamps.
+ */
 
+/**
+ * User account schema definition.
+ * @typedef {Object} UserDefinition
+ * @property {string} id - Unique user identifier.
+ * @property {string} name - User's full name.
+ * @property {string} email - Unique lowercase user email address.
+ * @property {string} password - User password hash.
+ * @property {'patron'|'admin'} role - Role tier for access control.
+ * @property {Date} createdAt - Registration date timestamp.
+ */
 const userSchema = {
   id:        { type: String, required: true, unique: true },
   name:      { type: String, required: true, trim: true },
